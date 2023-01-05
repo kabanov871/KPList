@@ -1,4 +1,4 @@
-package com.example.kplist.presentation
+package com.example.kplist.presentation.search
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,23 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.kplist.R
-import com.example.kplist.databinding.FragmentFavouritesBinding
+import com.example.kplist.databinding.FragmentSearchBinding
 
-class FavouritesFragment : Fragment() {
 
-    lateinit var binding: FragmentFavouritesBinding
+class SearchFragment : Fragment() {
+
+    lateinit var binding: FragmentSearchBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFavouritesBinding.inflate(inflater, container, false)
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
 
-        binding.bmenu.selectedItemId = R.id.item2
+        binding.bmenu.selectedItemId = R.id.item1
         binding.bmenu.setOnNavigationItemSelectedListener {
             when (it.itemId){
 
-                R.id.item1 ->{findNavController().navigate(R.id.action_favouritesFragment_to_searchFragment)}
+                R.id.item2 ->{findNavController().navigate(R.id.action_searchFragment_to_favouritesFragment)}
 
             }
             true

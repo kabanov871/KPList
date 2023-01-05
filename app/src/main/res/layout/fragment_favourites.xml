@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black2"
-    tools:context=".presentation.FavouritesFragment">
+    tools:context=".presentation.favorites.FavouritesFragment">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bmenu"
@@ -15,18 +15,19 @@
         android:background="@color/black"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@color/orange"
+        app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu"
-        app:labelVisibilityMode="selected"/>
+        app:menu="@menu/menu" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="favorites"
-        android:textColor="@color/orange"
-        tools:layout_editor_absoluteX="184dp"
-        tools:layout_editor_absoluteY="105dp" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rw"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bmenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
