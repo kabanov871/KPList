@@ -1,5 +1,12 @@
 package com.example.kplist.di
 
+import android.app.Application
+import com.example.kplist.data.dataSource.localDataSource.LocalDataSourceRepository
+import com.example.kplist.data.dataSource.localDataSource.LocalDataSourceRepositoryImpl
+import com.example.kplist.data.dataSource.remoteDataSource.RemoteDataSourceRepository
+import com.example.kplist.data.dataSource.remoteDataSource.RemoteDataSourceRepositoryImpl
+import com.example.kplist.data.database.KpDatabase
+import com.example.kplist.data.database.PreviewDao
 import com.example.kplist.data.network.ApiInterface
 import com.example.kplist.data.repositoryImpl.RepositoryImpl
 import com.example.kplist.domain.Repository
@@ -16,7 +23,21 @@ interface DataModule {
     @ApplicationScope
     fun bindRepository(impl: RepositoryImpl): Repository
 
+    @Binds
+    @ApplicationScope
+    fun bindRemoteDataSourceRepository(impl: RemoteDataSourceRepositoryImpl): RemoteDataSourceRepository
+
+    @Binds
+    @ApplicationScope
+    fun bindLocalDataSourceRepository(impl: LocalDataSourceRepositoryImpl): LocalDataSourceRepository
+
     companion object {
+
+        @Provides
+        @ApplicationScope
+        fun providePreviewDao(application: Application): PreviewDao {
+            return KpDatabase.getInstance(application).PreviewDAO
+        }
 
         @Provides
         fun baseUrl() = "https://api.kinopoisk.dev/"

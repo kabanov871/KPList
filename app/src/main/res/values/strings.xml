@@ -6,4 +6,6 @@
     <string name="favorites">Избранное</string>
     <string name="hint">Поиск по названию</string>
     <string name="search2">Расширеный поиск</string>
+    <string name="kp">Кинопоиск:</string>
+    <string name="imdb">Imdb:</string>
 </resources>

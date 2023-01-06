@@ -1,4 +1,4 @@
-package com.example.kplist.data.models.ApiListModel
+package com.example.kplist.data.models.ApiPreviewModel
 
 data class Item(
     val _id: String,

@@ -1,6 +1,6 @@
-package com.example.kplist.data.models.ApiListModel
+package com.example.kplist.data.models.ApiPreviewModel
 
-data class ApiListModel(
+data class ApiPreviewModel(
     val docs: List<Doc>,
     val limit: Int,
     val page: Int,

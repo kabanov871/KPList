@@ -1,8 +1,8 @@
 package com.example.kplist.domain
 
-import retrofit2.Response
+import androidx.lifecycle.LiveData
 
 interface Repository {
 
-    fun getList(genres: String, sort: String): List<ListUseCaseModel>
+    fun getList(): LiveData<List<PreviewUseCaseModel>>  //genres: String, sort: String
 }
