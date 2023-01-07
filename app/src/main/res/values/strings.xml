@@ -3,9 +3,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search">Поиск</string>
+    <string name="search3">Искать</string>
     <string name="favorites">Избранное</string>
     <string name="hint">Поиск по названию</string>
     <string name="search2">Расширеный поиск</string>
     <string name="kp">Кинопоиск:</string>
     <string name="imdb">Imdb:</string>
+    <string name="adSearch">Расширеный поиск:</string>
+    <string name="type">Тип:</string>
+    <string name="genres">Жанр:</string>
+    <string name="sort">Сортировка:</string>
 </resources>

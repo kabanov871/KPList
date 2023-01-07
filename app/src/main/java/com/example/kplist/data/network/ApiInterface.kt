@@ -3,13 +3,45 @@ package com.example.kplist.data.network
 import com.example.kplist.data.models.ApiPreviewModel.ApiPreviewModel
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiInterface {
 
-    @GET("movie?field=rating.kp&limit=200&search=7-10&token=ZQQ8GMN-TN54SGK-NB3MKEC-ZKB8V06")
-    suspend fun getList(): Response<ApiPreviewModel>
+    @GET("movie?")
+    suspend fun advancedSearchPreview(
+        @Query("field") nameField: String,
+        @Query("search") search: String,
+        @Query("field") nameField2: String,
+        @Query("search") search2: String,
+        @Query("sortField") sortField: String,
+        @Query("sortType") sortType: String,
+        @Query("limit") limit: String,
+        @Query("token") token: String
+    ): Response<ApiPreviewModel>
+
+    @GET("movie?")
+    suspend fun startingSearchPreview(
+        @Query("sortField") sortField: String,
+        @Query("sortType") sortType: String,
+        @Query("limit") limit: String,
+        @Query("token") token: String
+    ): Response<ApiPreviewModel>
+
+    @GET("movie?")
+    suspend fun searchByNamePreview(
+        @Query("field") nameField: String,
+        @Query("search") search: String,
+        @Query("isStrict") isStrict: Boolean,
+        @Query("sortField") sortField: String,
+        @Query("sortType") sortType: String,
+        @Query("limit") limit: String,
+        @Query("token") token: String
+    ): Response<ApiPreviewModel>
 }
 
-//@Query("field") genres: String, @Query("search") sort: String
+
+//limit=1000&token=ZQQ8GMN-TN54SGK-NB3MKEC-ZKB8V06
+//field=rating.kp&search=6-10&limit=1000&
+//
 //@Path("genres") genres: String, @Path("sort") sort: String
 //movie?field=rating.kp&search=7-10&field=year&limit=100&search=2017-2020&field=typeNumber&search=2&sortField=year&sortType=1&sortField=votes.imdb&sortType=-1&token=ZQQ8GMN-TN54SGK-NB3MKEC-ZKB8V06
