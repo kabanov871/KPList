@@ -8,7 +8,7 @@ import javax.inject.Inject
 class Mapper @Inject constructor() {
 
     fun mapPreviewDbModelToPreviewUseCaseModel(model: PreviewDbModel) = PreviewUseCaseModel(
-        id = model.id,
+        id = model.movieId,
         poster = model.poster,
         name = model.name,
         year = model.year,

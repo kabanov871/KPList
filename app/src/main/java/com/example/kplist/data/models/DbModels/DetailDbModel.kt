@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName ="preview_table")
-data class PreviewDbModel(
+@Entity(tableName ="detail_table")
+data class DetailDbModel (
 
     @PrimaryKey(autoGenerate = true)
     val id: Int,
@@ -17,11 +17,17 @@ data class PreviewDbModel(
 
     val name: String,
 
+    val description: String,
+
     val year: String,
 
     @ColumnInfo(name = "rating_kp")
     val ratingKp: Double,
 
     @ColumnInfo(name = "rating_imdb")
-    val ratingImdb: Double
-)
+    val ratingImdb: Double,
+
+    @ColumnInfo(name = "rating_critic")
+    val ratingCritic: Double,
+
+    )

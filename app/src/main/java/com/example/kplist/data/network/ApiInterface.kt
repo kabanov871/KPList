@@ -20,14 +20,6 @@ interface ApiInterface {
     ): Response<ApiPreviewModel>
 
     @GET("movie?")
-    suspend fun startingSearchPreview(
-        @Query("sortField") sortField: String,
-        @Query("sortType") sortType: String,
-        @Query("limit") limit: String,
-        @Query("token") token: String
-    ): Response<ApiPreviewModel>
-
-    @GET("movie?")
     suspend fun searchByNamePreview(
         @Query("field") nameField: String,
         @Query("search") search: String,

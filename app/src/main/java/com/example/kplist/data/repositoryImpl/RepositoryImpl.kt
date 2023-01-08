@@ -19,7 +19,7 @@ class RepositoryImpl @Inject constructor (
     private val mapper: Mapper
         ): Repository{
 
-    override fun advancedSearchPreview(
+      override fun advancedSearchPreview(
         nameField: String,
         search: String,
         nameField2: String,
@@ -27,44 +27,23 @@ class RepositoryImpl @Inject constructor (
         sortField: String,
         sortType: String,
         limit: String,
-        token: String
-    ): LiveData<List<PreviewUseCaseModel>> {
-
+        token: String) {
         CoroutineScope(Dispatchers.IO).launch{
 
-        localDataSourceRepository.clearPreview()
-        remoteDataSourceRepository.advancedSearchPreviewStartMigration(
+          localDataSourceRepository.clearPreview()
+          remoteDataSourceRepository.advancedSearchPreviewStartMigration(
             nameField, search, nameField2, search2, sortField, sortType, limit, token
-        )
+          )
         }
 
-        return Transformations.map(localDataSourceRepository.getAllPreview()) {
+      }
+
+      override val allPreview = Transformations.map(localDataSourceRepository.allPreview) {
             mapper.mapListPreviewDbModelToListPreviewUseCaseModel(it)
-        }
+      }
 
-    }
 
-    override fun startingSearchPreview(
-        sortField: String,
-        sortType: String,
-        limit: String,
-        token: String
-    ): LiveData<List<PreviewUseCaseModel>> {
-
-        CoroutineScope(Dispatchers.IO).launch{
-
-            localDataSourceRepository.clearPreview()
-            remoteDataSourceRepository.startingSearchPreviewStartMigration(
-                sortField, sortType, limit, token
-            )
-        }
-
-        return Transformations.map(localDataSourceRepository.getAllPreview()) {
-            mapper.mapListPreviewDbModelToListPreviewUseCaseModel(it)
-        }
-    }
-
-    override fun searchByNamePreview(
+      override fun searchByNamePreview(
         nameField: String,
         search: String,
         isStrict: Boolean,
@@ -72,19 +51,19 @@ class RepositoryImpl @Inject constructor (
         sortType: String,
         limit: String,
         token: String
-    ): LiveData<List<PreviewUseCaseModel>> {
+        ) {
 
-        CoroutineScope(Dispatchers.IO).launch{
+          CoroutineScope(Dispatchers.IO).launch{
 
-            localDataSourceRepository.clearPreview()
-            remoteDataSourceRepository.searchByNamePreviewStartMigration(
-                nameField, search, isStrict, sortField, sortType, limit, token
-            )
-        }
+              localDataSourceRepository.clearPreview()
+              remoteDataSourceRepository.searchByNamePreviewStartMigration(
+                  nameField, search, isStrict, sortField, sortType, limit, token
+              )
+          }
+      }
 
-        return Transformations.map(localDataSourceRepository.getAllPreview()) {
-            mapper.mapListPreviewDbModelToListPreviewUseCaseModel(it)
-        }
+    override fun searchDetail(movieId: String) {
+        TODO("Not yet implemented")
     }
 
 }

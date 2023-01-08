@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 
 interface Repository {
 
+    val allPreview: LiveData<List<PreviewUseCaseModel>>
+
     fun advancedSearchPreview(
         nameField: String,
         search: String,
@@ -13,14 +15,7 @@ interface Repository {
         sortType: String,
         limit: String,
         token: String
-    ): LiveData<List<PreviewUseCaseModel>>
-
-    fun startingSearchPreview(
-        sortField: String,
-        sortType: String,
-        limit: String,
-        token: String
-    ): LiveData<List<PreviewUseCaseModel>>
+    )
 
     fun searchByNamePreview(
         nameField: String,
@@ -30,5 +25,7 @@ interface Repository {
         sortType: String,
         limit: String,
         token: String
-    ): LiveData<List<PreviewUseCaseModel>>
+    )
+
+    fun searchDetail(movieId: String)
 }
