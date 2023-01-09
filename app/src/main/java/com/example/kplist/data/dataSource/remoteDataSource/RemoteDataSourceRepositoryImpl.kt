@@ -1,15 +1,12 @@
 package com.example.kplist.data.dataSource.remoteDataSource
 
 import android.app.Application
-import android.graphics.Color
-import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import com.example.kplist.R
 import com.example.kplist.data.dataSource.localDataSource.LocalDataSourceRepository
-import com.example.kplist.data.models.ApiPreviewModel.ApiPreviewModel
-import com.example.kplist.data.models.ApiPreviewModel.Doc
-import com.example.kplist.data.models.DbModels.PreviewDbModel
+import com.example.kplist.data.models.apiPreviewModel.ApiPreviewModel
+import com.example.kplist.data.models.apiPreviewModel.Doc
+import com.example.kplist.data.models.dbModels.PreviewDbModel
 import com.example.kplist.data.network.ApiInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

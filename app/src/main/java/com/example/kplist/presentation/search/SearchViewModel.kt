@@ -2,10 +2,10 @@ package com.example.kplist.presentation.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.kplist.domain.AdvancedSearchPreviewUseCase
-import com.example.kplist.domain.PreviewUseCaseModel
-import com.example.kplist.domain.SearchByNamePreviewUseCase
-import com.example.kplist.domain.GetAllPreviewUseCase
+import com.example.kplist.domain.previewUseCase.AdvancedSearchPreviewUseCase
+import com.example.kplist.domain.modelsUseCase.PreviewUseCaseModel
+import com.example.kplist.domain.previewUseCase.SearchByNamePreviewUseCase
+import com.example.kplist.domain.previewUseCase.GetAllPreviewUseCase
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(

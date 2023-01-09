@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kplist.databinding.MovieItemBinding
-import com.example.kplist.domain.PreviewUseCaseModel
+import com.example.kplist.domain.modelsUseCase.PreviewUseCaseModel
 import com.squareup.picasso.Picasso
 
 class SearchAdapter () : RecyclerView.Adapter<SearchAdapter.SearchHolder>(){

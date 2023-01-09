@@ -1,8 +1,7 @@
 package com.example.kplist.data.mapper
 
-import com.example.kplist.data.models.ApiPreviewModel.Doc
-import com.example.kplist.data.models.DbModels.PreviewDbModel
-import com.example.kplist.domain.PreviewUseCaseModel
+import com.example.kplist.data.models.dbModels.PreviewDbModel
+import com.example.kplist.domain.modelsUseCase.PreviewUseCaseModel
 import javax.inject.Inject
 
 class Mapper @Inject constructor() {

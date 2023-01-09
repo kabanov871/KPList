@@ -1,6 +1,6 @@
 package com.example.kplist.data.network
 
-import com.example.kplist.data.models.ApiPreviewModel.ApiPreviewModel
+import com.example.kplist.data.models.apiPreviewModel.ApiPreviewModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

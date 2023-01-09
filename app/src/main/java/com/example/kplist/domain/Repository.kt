@@ -1,6 +1,7 @@
 package com.example.kplist.domain
 
 import androidx.lifecycle.LiveData
+import com.example.kplist.domain.modelsUseCase.PreviewUseCaseModel
 
 interface Repository {
 
@@ -27,5 +28,5 @@ interface Repository {
         token: String
     )
 
-    fun searchDetail(movieId: String)
+    fun searchMovie(movieId: String)
 }

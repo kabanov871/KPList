@@ -1,12 +1,9 @@
 package com.example.kplist.data.repositoryImpl
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.kplist.data.dataSource.localDataSource.LocalDataSourceRepository
 import com.example.kplist.data.dataSource.remoteDataSource.RemoteDataSourceRepository
 import com.example.kplist.data.mapper.Mapper
-import com.example.kplist.data.network.ApiInterface
-import com.example.kplist.domain.PreviewUseCaseModel
 import com.example.kplist.domain.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -62,7 +59,7 @@ class RepositoryImpl @Inject constructor (
           }
       }
 
-    override fun searchDetail(movieId: String) {
+    override fun searchMovie(movieId: String) {
         TODO("Not yet implemented")
     }
 
