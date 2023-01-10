@@ -13,7 +13,7 @@ interface MovieDao {
     suspend fun insertMovie(detailDbModel: MovieDbModel)
 
     @Query("SELECT * FROM movie_table WHERE id = :id")
-    fun getMovie(id: Int): LiveData<MovieDbModel>
+    fun getMovie(id: Int): LiveData<MovieDbModel?>
 
     @Query("DELETE FROM movie_table")
     suspend fun clearMovie()

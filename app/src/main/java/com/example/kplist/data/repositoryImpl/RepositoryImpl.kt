@@ -1,13 +1,15 @@
 package com.example.kplist.data.repositoryImpl
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.kplist.data.dataSource.localDataSource.LocalDataSourceRepository
 import com.example.kplist.data.dataSource.remoteDataSource.RemoteDataSourceRepository
 import com.example.kplist.data.mapper.Mapper
 import com.example.kplist.domain.Repository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.kplist.domain.modelsUseCase.DetailUseCaseModel
+import com.example.kplist.domain.modelsUseCase.MovieUseCaseModel
+import com.example.kplist.domain.modelsUseCase.PersonUseCaseModel
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor (
@@ -35,12 +37,16 @@ class RepositoryImpl @Inject constructor (
 
       }
 
-      override val allPreview = Transformations.map(localDataSourceRepository.allPreview) {
+    override val allPreview = Transformations.map(localDataSourceRepository.allPreview) {
             mapper.mapListPreviewDbModelToListPreviewUseCaseModel(it)
       }
 
+    override val getPerson = Transformations.map(localDataSourceRepository.allPerson) {
+        mapper.mapListPersonDbModelToListPersonUseCaseModel(it)
+    }
 
-      override fun searchByNamePreview(
+
+    override fun searchByNamePreview(
         nameField: String,
         search: String,
         isStrict: Boolean,
@@ -59,8 +65,28 @@ class RepositoryImpl @Inject constructor (
           }
       }
 
-    override fun searchMovie(movieId: String) {
-        TODO("Not yet implemented")
+    override fun searchMovie(movieId: String, token: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+
+            localDataSourceRepository.clearMovie()
+            localDataSourceRepository.clearDetail()
+            localDataSourceRepository.clearPerson()
+            remoteDataSourceRepository.getMovie(movieId, token)
+
+        }
     }
+
+    override fun getDetail(name: String): LiveData<List<DetailUseCaseModel>> {
+        return Transformations.map(localDataSourceRepository.getAllDetail(name)) {
+            mapper.mapListDetailDbModelToListDetailUseCaseModel(it)}
+    }
+
+    override fun getMovie(): LiveData<MovieUseCaseModel?> {
+        return Transformations.map(localDataSourceRepository.getMovie(1)) {
+            mapper.mapMovieDbModelToMovieUseCaseModel(it)}
+    }
+
+
+
 
 }

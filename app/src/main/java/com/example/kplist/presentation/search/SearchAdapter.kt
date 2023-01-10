@@ -7,7 +7,8 @@ import com.example.kplist.databinding.MovieItemBinding
 import com.example.kplist.domain.modelsUseCase.PreviewUseCaseModel
 import com.squareup.picasso.Picasso
 
-class SearchAdapter () : RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
+class SearchAdapter (private val searchMovie: (movieId: String) -> Unit,
+                     private val openMovie: () -> Unit) : RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
 
     private var cardList = ArrayList<PreviewUseCaseModel>()
 
@@ -22,7 +23,7 @@ class SearchAdapter () : RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     }
 
     override fun onBindViewHolder(holder: SearchHolder, position: Int) {
-        holder.bind(cardList[position])
+        holder.bind(cardList[position], searchMovie, openMovie)
     }
 
     fun setList (list: List<PreviewUseCaseModel>){
@@ -33,7 +34,9 @@ class SearchAdapter () : RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     class SearchHolder(val binding: MovieItemBinding): RecyclerView.ViewHolder(binding.root){
 
 
-        fun bind(card: PreviewUseCaseModel) {
+        fun bind(card: PreviewUseCaseModel,
+                 searchMovie:(movieId: String)->Unit,
+                 openMovie:()->Unit) {
 
             binding.apply {
                 val getImage = card.poster
@@ -42,6 +45,11 @@ class SearchAdapter () : RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
                 textViewImdb.text = card.ratingImdb.toString()
                 textViewName.text = card.name
                 textViewYear.text = card.year
+
+                cardView.setOnClickListener {
+                    searchMovie(card.id.toString())
+                    openMovie()
+                }
 
             }
 

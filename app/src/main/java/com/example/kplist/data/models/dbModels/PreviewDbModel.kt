@@ -13,15 +13,15 @@ data class PreviewDbModel(
     @ColumnInfo(name = "movie_id")
     val movieId: Int,
 
-    val poster: String,
+    val poster: String? = null,
 
-    val name: String,
+    val name: String? = null,
 
-    val year: String,
+    val year: String? = null,
 
     @ColumnInfo(name = "rating_kp")
-    val ratingKp: Double,
+    val ratingKp: Double? = null,
 
     @ColumnInfo(name = "rating_imdb")
-    val ratingImdb: Double
+    val ratingImdb: Double? = null
 )

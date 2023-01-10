@@ -11,5 +11,5 @@ data class DetailDbModel (
 
     val name: String,
 
-    val value: String
+    val value: String? = null
         )

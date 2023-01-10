@@ -10,7 +10,7 @@ import com.example.kplist.data.models.dbModels.*
     PreviewDbModel::class,
     MovieDbModel::class,
     PersonDbModel::class,
-    DetailDbModel::class], version = 7)
+    DetailDbModel::class], version = 12)
 abstract class KpDatabase: RoomDatabase() {
 
     abstract val previewDAO: PreviewDao
@@ -26,7 +26,7 @@ abstract class KpDatabase: RoomDatabase() {
                 var instance = INSTANCE
                 if(instance==null){
                     instance = Room.databaseBuilder(
-                        context.applicationContext, KpDatabase::class.java, "database7"
+                        context.applicationContext, KpDatabase::class.java, "database12"
                     ).build()
                 }
                 return instance

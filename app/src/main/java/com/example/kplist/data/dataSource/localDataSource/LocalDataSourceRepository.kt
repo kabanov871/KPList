@@ -14,7 +14,7 @@ interface LocalDataSourceRepository {
 
     fun insertMovie(movieModel: MovieDbModel)
 
-    fun getMovie(id: Int): LiveData<MovieDbModel>
+    fun getMovie(id: Int): LiveData<MovieDbModel?>
 
     suspend fun clearMovie()
 

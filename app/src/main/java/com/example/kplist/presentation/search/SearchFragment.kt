@@ -57,7 +57,7 @@ class SearchFragment : Fragment() {
         }
 
         binding.rw.layoutManager = GridLayoutManager(context, 2)
-        adapter = SearchAdapter()
+        adapter = SearchAdapter ({ movieId: String -> searchMovie(movieId)},{openMovie()})
         binding.rw.adapter = adapter
 
         binding.button.setOnClickListener {
@@ -70,11 +70,9 @@ class SearchFragment : Fragment() {
                                                       nameField2: String,
                                                       search2: String,
                                                       sortField: String,
-                                                      sortType: String,
-                                                      limit: String,
-                                                      token: String ->
+                                                      sortType: String ->
                 advancedSearch(
-                    nameField, search, nameField2, search2, sortField, sortType, limit, token
+                    nameField, search, nameField2, search2, sortField, sortType
                 )
             }
             val parameters = Bundle()
@@ -120,13 +118,17 @@ class SearchFragment : Fragment() {
         nameField2: String,
         search2: String,
         sortField: String,
-        sortType: String,
-        limit: String,
-        token: String
+        sortType: String
     ){
         viewModel.advancedSearchPreview(
-            nameField, search, nameField2, search2, sortField, sortType, limit, token
+            nameField, search, nameField2, search2, sortField, sortType, Constance.LIMIT, Constance.TOKEN
         )
+    }
+    private fun searchMovie(movieId: String) {
+        viewModel.searchMovie(movieId, Constance.TOKEN)
+    }
+    private fun openMovie() {
+        findNavController().navigate(R.id.action_searchFragment_to_movieFragment)
     }
 
 }

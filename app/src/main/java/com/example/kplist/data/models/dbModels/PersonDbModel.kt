@@ -13,9 +13,9 @@ data class PersonDbModel (
     @ColumnInfo(name = "person_id")
     val personId: Int,
 
-    val photo: String,
+    val photo: String? = null,
 
-    val name: String,
+    val name: String? = null,
 
-    val prof: String
+    val prof: String? = null
         )

@@ -1,5 +1,6 @@
 package com.example.kplist.data.network
 
+import com.example.kplist.data.models.apiMovieModel.ApiMovieModel
 import com.example.kplist.data.models.apiPreviewModel.ApiPreviewModel
 import retrofit2.Response
 import retrofit2.http.GET
@@ -29,6 +30,13 @@ interface ApiInterface {
         @Query("limit") limit: String,
         @Query("token") token: String
     ): Response<ApiPreviewModel>
+
+    @GET("movie?")
+    suspend fun getMovie(
+        @Query("field") nameField: String,
+        @Query("search") id: String,
+        @Query("token") token: String
+    ): Response<ApiMovieModel>
 }
 
 
