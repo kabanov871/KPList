@@ -3,7 +3,10 @@ package com.example.kplist.di
 import android.app.Application
 import com.example.kplist.presentation.facts.FactsFragment
 import com.example.kplist.presentation.movies.MovieFragment
+import com.example.kplist.presentation.persons.PersonFragment
+import com.example.kplist.presentation.reviews.ReviewFragment
 import com.example.kplist.presentation.search.SearchFragment
+import com.example.kplist.presentation.trailers.TrailerFragment
 import dagger.BindsInstance
 import dagger.Component
 
@@ -21,6 +24,12 @@ interface ApplicationComponent {
     fun inject(fragment: MovieFragment)
 
     fun inject(fragment: FactsFragment)
+
+    fun inject(fragment: PersonFragment)
+
+    fun inject(fragment: ReviewFragment)
+
+    fun inject(fragment: TrailerFragment)
 
     @Component.Factory
     interface Factory {

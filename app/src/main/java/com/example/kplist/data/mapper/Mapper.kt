@@ -1,13 +1,7 @@
 package com.example.kplist.data.mapper
 
-import com.example.kplist.data.models.dbModels.DetailDbModel
-import com.example.kplist.data.models.dbModels.MovieDbModel
-import com.example.kplist.data.models.dbModels.PersonDbModel
-import com.example.kplist.data.models.dbModels.PreviewDbModel
-import com.example.kplist.domain.modelsUseCase.DetailUseCaseModel
-import com.example.kplist.domain.modelsUseCase.MovieUseCaseModel
-import com.example.kplist.domain.modelsUseCase.PersonUseCaseModel
-import com.example.kplist.domain.modelsUseCase.PreviewUseCaseModel
+import com.example.kplist.data.models.dbModels.*
+import com.example.kplist.domain.modelsUseCase.*
 import javax.inject.Inject
 
 class Mapper @Inject constructor() {
@@ -56,5 +50,19 @@ class Mapper @Inject constructor() {
 
     fun mapListPersonDbModelToListPersonUseCaseModel(list: List<PersonDbModel>) = list.map {
         mapPersonDbModelToPersonUseCaseModel(it)
+    }
+
+    fun mapReviewDbModelToReviewUseCaseModel(model: ReviewDbModel) = ReviewUseCaseModel(
+
+        review = model.review,
+        title = model.title,
+        type = model.type,
+        author = model.author,
+        likes = model.likes,
+        dislikes = model.dislikes
+    )
+
+    fun mapListReviewDbModelToListReviewUseCaseModel(list: List<ReviewDbModel>) = list.map {
+        mapReviewDbModelToReviewUseCaseModel(it)
     }
 }

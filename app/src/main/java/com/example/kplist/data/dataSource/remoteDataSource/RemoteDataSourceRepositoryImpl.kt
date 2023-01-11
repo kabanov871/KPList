@@ -11,10 +11,7 @@ import com.example.kplist.data.models.apiMovieModel.Person
 import com.example.kplist.data.models.apiMovieModel.Trailer
 import com.example.kplist.data.models.apiPreviewModel.ApiPreviewModel
 import com.example.kplist.data.models.apiPreviewModel.Doc
-import com.example.kplist.data.models.dbModels.DetailDbModel
-import com.example.kplist.data.models.dbModels.MovieDbModel
-import com.example.kplist.data.models.dbModels.PersonDbModel
-import com.example.kplist.data.models.dbModels.PreviewDbModel
+import com.example.kplist.data.models.dbModels.*
 import com.example.kplist.data.network.ApiInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -24,8 +21,7 @@ import javax.inject.Inject
 class RemoteDataSourceRepositoryImpl @Inject constructor(
     private val localDataSourceRepository: LocalDataSourceRepository,
     private val api: ApiInterface,
-    private val application: Application,
-    private val mapper: Mapper
+    private val application: Application
 ): RemoteDataSourceRepository {
 
     override suspend fun advancedSearchPreviewStartMigration(
@@ -142,6 +138,34 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
             }
             else { withContext(Dispatchers.Main) {
                 Toast.makeText(application,  R.string.loadFail, Toast.LENGTH_SHORT).show()}}
+        }
+    }
+
+    override suspend fun getReview(field: String, movieId: String, limit: String, token: String) {
+
+        val reviewList = ArrayList<com.example.kplist.data.models.apiReviewModel.Doc>()
+
+        api.searchReview(field, movieId, limit, token).let {
+
+            if (it.isSuccessful) {
+
+                val response = it.body()
+
+                reviewList.clear()
+                response?.docs?.let {it1 -> reviewList.addAll(it1)}
+
+                for (audit in reviewList) {
+                    ReviewDbModel(
+                        0,
+                        audit.review,
+                        audit.title,
+                        audit.type,
+                        audit.author,
+                        audit.reviewLikes,
+                        audit.reviewDislikes
+                    ).let { localDataSourceRepository.insertReview(it) }
+                }
+            }
         }
     }
 

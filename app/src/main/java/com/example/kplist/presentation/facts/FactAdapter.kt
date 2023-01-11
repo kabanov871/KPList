@@ -36,7 +36,7 @@ class FactAdapter: RecyclerView.Adapter<FactAdapter.FactHolder>() {
 
             binding.apply {
 
-                binding.textFact.text = detail.value
+                textFact.text = detail.value
 
             }
 

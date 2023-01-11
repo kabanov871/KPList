@@ -9,6 +9,8 @@ import com.example.kplist.domain.Repository
 import com.example.kplist.domain.modelsUseCase.DetailUseCaseModel
 import com.example.kplist.domain.modelsUseCase.MovieUseCaseModel
 import com.example.kplist.domain.modelsUseCase.PersonUseCaseModel
+import com.example.kplist.domain.modelsUseCase.ReviewUseCaseModel
+import com.example.kplist.presentation.Constance
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
@@ -43,6 +45,10 @@ class RepositoryImpl @Inject constructor (
 
     override val getPerson = Transformations.map(localDataSourceRepository.allPerson) {
         mapper.mapListPersonDbModelToListPersonUseCaseModel(it)
+    }
+
+    override val getReview = Transformations.map(localDataSourceRepository.allReview) {
+        mapper.mapListReviewDbModelToListReviewUseCaseModel(it)
     }
 
 
@@ -86,7 +92,12 @@ class RepositoryImpl @Inject constructor (
             mapper.mapMovieDbModelToMovieUseCaseModel(it)}
     }
 
-
+    override fun searchReview(movieId: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+        localDataSourceRepository.clearReview()
+        remoteDataSourceRepository.getReview(
+            Constance.REVIEWS_BY_ID, movieId, Constance.LIMIT, Constance.TOKEN)}
+    }
 
 
 }

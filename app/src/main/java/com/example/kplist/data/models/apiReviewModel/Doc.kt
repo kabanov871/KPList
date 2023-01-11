@@ -14,5 +14,5 @@ data class Doc(
     val title: String,
     val type: String,
     val updatedAt: String,
-    val userRating: Int
+    val userRating: Double
 )
