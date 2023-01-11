@@ -13,8 +13,7 @@ class SearchByNamePreviewUseCase @Inject constructor (private val repository: Re
         sortType: String,
         limit: String,
         token: String
-    ): LiveData<List<PreviewUseCaseModel>> {
-
-        return repository.searchByNamePreview(nameField, search, isStrict, sortField, sortType, limit, token)
+        ) { repository.searchByNamePreview(
+            nameField, search, isStrict, sortField, sortType, limit, token)
     }
 }

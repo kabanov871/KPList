@@ -14,10 +14,8 @@ class AdvancedSearchPreviewUseCase @Inject constructor (private val repository: 
         sortType: String,
         limit: String,
         token: String
-    ): LiveData<List<PreviewUseCaseModel>> {
-
-        return repository.advancedSearchPreview(
+        ) { repository.advancedSearchPreview(
             nameField, search, nameField2, search2, sortField, sortType, limit, token
-        )
+           )
     }
 }

@@ -11,6 +11,56 @@
     <string name="imdb">Imdb:</string>
     <string name="adSearch">Расширеный поиск:</string>
     <string name="type">Тип:</string>
+    <string name="selectedType">Выберите тип:</string>
+    <string name="selectedGenre">Выберите жанр:</string>
+    <string name="selectedSort">Выберите сортировку:</string>
     <string name="genres">Жанр:</string>
     <string name="sort">Сортировка:</string>
+
+    <string name="load">Загрузка</string>
+    <string name="loadFail">Ошибка загрузки</string>
+
+    //for AlertDialogs
+    <string name="movie">фильмы</string>
+    <string name="serials">сериалы</string>
+    <string name="cartoons">мультфильмы</string>
+    <string name="anime">аниме</string>
+    <string name="animeSeries">аниме-сериалы</string>
+
+    <string name="biography">биография</string>
+    <string name="actionMovie">боевик</string>
+    <string name="western">вестерн</string>
+    <string name="military">военный</string>
+    <string name="detective">детектив</string>
+    <string name="childlike">детский</string>
+    <string name="adults">для взрослых</string>
+    <string name="documentary">документальный</string>
+    <string name="drama">драма</string>
+    <string name="game">игра</string>
+    <string name="history">история</string>
+    <string name="comedy">комедия</string>
+    <string name="concert">концерт</string>
+    <string name="shortFilm">короткометражка</string>
+    <string name="crime">криминал</string>
+    <string name="melodrama">мелодрама</string>
+    <string name="music">музыка</string>
+    <string name="cartoon">мультфильм</string>
+    <string name="musical">мюзикл</string>
+    <string name="news">новости</string>
+    <string name="adventures">приключения</string>
+    <string name="realTV">реальное ТВ</string>
+    <string name="family">семейный</string>
+    <string name="sport">спорт</string>
+    <string name="talkShows">ток-шоу</string>
+    <string name="thriller">триллер</string>
+    <string name="horrors">ужасы</string>
+    <string name="fantastic">фантастика</string>
+    <string name="filmNoir">фильм-нуар</string>
+    <string name="fantasy">фэнтези</string>
+    <string name="ceremony">церемония</string>
+
+    <string name="ratingKp">По рейтингу Кинопоиска</string>
+    <string name="ratingImdb">По рейтингу IMDB</string>
+    <string name="releaseDate">По дате выхода</string>
+
 </resources>

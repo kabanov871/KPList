@@ -15,13 +15,6 @@ interface RemoteDataSourceRepository {
         token: String
     )
 
-    suspend fun startingSearchPreviewStartMigration(
-        sortField: String,
-        sortType: String,
-        limit: String,
-        token: String
-    )
-
     suspend fun searchByNamePreviewStartMigration(
         nameField: String,
         search: String,

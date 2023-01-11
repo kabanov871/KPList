@@ -10,8 +10,4 @@
         <item name="android:background">@drawable/bottom_sheet_background</item>
     </style>
 
-    <style name="AlertDialog" parent="Base.Theme.AppCompat.Light.Dialog">
-        <item name="android:textColorPrimary">@color/orange</item>
-        <item name="android:background">@color/black</item>
-    </style>
 </resources>

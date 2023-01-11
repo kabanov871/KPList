@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kplist.R
 import com.example.kplist.databinding.FragmentSearchBinding
+import com.example.kplist.presentation.Constance
 import com.example.kplist.presentation.MyApp
 import com.example.kplist.presentation.ViewModelFactory
 import javax.inject.Inject
@@ -60,11 +61,22 @@ class SearchFragment : Fragment() {
         binding.rw.adapter = adapter
 
         binding.button.setOnClickListener {
-            displaySearchByNamePreview(binding.editText.text.toString())
+            searchByNamePreview(binding.editText.text.toString())
         }
 
         binding.button2.setOnClickListener {
-            val panelCategory = BottomSheetFragment()
+            val panelCategory = BottomSheetFragment { nameField: String,
+                                                      search: String,
+                                                      nameField2: String,
+                                                      search2: String,
+                                                      sortField: String,
+                                                      sortType: String,
+                                                      limit: String,
+                                                      token: String ->
+                advancedSearch(
+                    nameField, search, nameField2, search2, sortField, sortType, limit, token
+                )
+            }
             val parameters = Bundle()
             parameters.putString("idCategory", "wordEntity.hint")
             panelCategory.arguments = parameters
@@ -80,29 +92,41 @@ class SearchFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun displayStartPreview(){
 
-        viewModel.startingSearchPreview(
-            "year", "-1", "1000",
-            "ZQQ8GMN-TN54SGK-NB3MKEC-ZKB8V06").observe(viewLifecycleOwner
+        viewModel.getAllPreview.observe(viewLifecycleOwner
 
         ) {
-            adapter.setList(it.asReversed())
+            adapter.setList(it)
             adapter.notifyDataSetChanged()
         }
 
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private fun displaySearchByNamePreview(name: String){
+    private fun searchByNamePreview(name: String) {
 
         viewModel.searchByNamePreview(
-            "name", name, false,"year", "-1", "1000",
-            "ZQQ8GMN-TN54SGK-NB3MKEC-ZKB8V06").observe(viewLifecycleOwner
+            Constance.SORT_BY_NAME,
+            name,
+            false,
+            Constance.SORT_BY_YEAR,
+            Constance.FROM_LARGER_TO_SMALLER,
+            Constance.LIMIT,
+            Constance.TOKEN
+        )
+    }
 
-        ) {
-            adapter.setList(it.asReversed())
-            adapter.notifyDataSetChanged()
-        }
-
+    private fun advancedSearch(
+        nameField: String,
+        search: String,
+        nameField2: String,
+        search2: String,
+        sortField: String,
+        sortType: String,
+        limit: String,
+        token: String
+    ){
+        viewModel.advancedSearchPreview(
+            nameField, search, nameField2, search2, sortField, sortType, limit, token
+        )
     }
 
 }

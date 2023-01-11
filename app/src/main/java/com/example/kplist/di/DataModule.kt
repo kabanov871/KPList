@@ -5,8 +5,7 @@ import com.example.kplist.data.dataSource.localDataSource.LocalDataSourceReposit
 import com.example.kplist.data.dataSource.localDataSource.LocalDataSourceRepositoryImpl
 import com.example.kplist.data.dataSource.remoteDataSource.RemoteDataSourceRepository
 import com.example.kplist.data.dataSource.remoteDataSource.RemoteDataSourceRepositoryImpl
-import com.example.kplist.data.database.KpDatabase
-import com.example.kplist.data.database.PreviewDao
+import com.example.kplist.data.database.*
 import com.example.kplist.data.network.ApiInterface
 import com.example.kplist.data.repositoryImpl.RepositoryImpl
 import com.example.kplist.domain.Repository
@@ -37,6 +36,36 @@ interface DataModule {
         @ApplicationScope
         fun providePreviewDao(application: Application): PreviewDao {
             return KpDatabase.getInstance(application).PreviewDAO
+        }
+
+        @Provides
+        @ApplicationScope
+        fun provideDetailDao(application: Application): DetailDao {
+            return KpDatabase.getInstance(application).DetailDAO
+        }
+
+        @Provides
+        @ApplicationScope
+        fun providePersonDao(application: Application): PersonDao {
+            return KpDatabase.getInstance(application).PersonDAO
+        }
+
+        @Provides
+        @ApplicationScope
+        fun provideTrailerDao(application: Application): TrailerDao {
+            return KpDatabase.getInstance(application).TrailerDAO
+        }
+
+        @Provides
+        @ApplicationScope
+        fun provideCountryDao(application: Application): CountryDao {
+            return KpDatabase.getInstance(application).CountryDAO
+        }
+
+        @Provides
+        @ApplicationScope
+        fun provideFactDao(application: Application): FactDao {
+            return KpDatabase.getInstance(application).FactDAO
         }
 
         @Provides
