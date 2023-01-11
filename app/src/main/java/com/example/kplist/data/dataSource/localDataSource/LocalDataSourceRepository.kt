@@ -1,7 +1,7 @@
 package com.example.kplist.data.dataSource.localDataSource
 
 import androidx.lifecycle.LiveData
-import com.example.kplist.data.models.DbModels.*
+import com.example.kplist.data.models.dbModels.*
 
 interface LocalDataSourceRepository {
 
@@ -12,11 +12,11 @@ interface LocalDataSourceRepository {
     suspend fun clearPreview()
 
 
-    fun insertDetail(detailModel: DetailDbModel)
+    fun insertMovie(movieModel: MovieDbModel)
 
-    val allDetail: LiveData<List<DetailDbModel>>
+    fun getMovie(id: Int): LiveData<MovieDbModel?>
 
-    suspend fun clearDetail()
+    suspend fun clearMovie()
 
 
     fun insertPerson(personModel: PersonDbModel)
@@ -26,23 +26,10 @@ interface LocalDataSourceRepository {
     suspend fun clearPerson()
 
 
-    fun insertTrailer(trailerModel: TrailerDbModel)
+    fun insertDetail(detailModel: DetailDbModel)
 
-    val allTrailer: LiveData<List<TrailerDbModel>>
+    fun getAllDetail(name: String): LiveData<List<DetailDbModel>>
 
-    suspend fun clearTrailer()
+    suspend fun clearDetail()
 
-
-    fun insertCountry(countryModel: CountryDbModel)
-
-    val allCountry: LiveData<List<CountryDbModel>>
-
-    suspend fun clearCountry()
-
-
-    fun insertFact(factModel: FactDbModel)
-
-    val allFact: LiveData<List<FactDbModel>>
-
-    suspend fun clearFact()
 }

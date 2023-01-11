@@ -2,16 +2,18 @@ package com.example.kplist.presentation.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.kplist.domain.AdvancedSearchPreviewUseCase
-import com.example.kplist.domain.PreviewUseCaseModel
-import com.example.kplist.domain.SearchByNamePreviewUseCase
-import com.example.kplist.domain.GetAllPreviewUseCase
+import com.example.kplist.domain.detailsUseCase.SearchMovieUseCase
+import com.example.kplist.domain.previewUseCase.AdvancedSearchPreviewUseCase
+import com.example.kplist.domain.modelsUseCase.PreviewUseCaseModel
+import com.example.kplist.domain.previewUseCase.SearchByNamePreviewUseCase
+import com.example.kplist.domain.previewUseCase.GetAllPreviewUseCase
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(
     private val advancedSearchPreviewUseCase: AdvancedSearchPreviewUseCase,
-    private val startingSearchPreviewUseCase: GetAllPreviewUseCase,
-    private val searchByNamePreviewUseCase: SearchByNamePreviewUseCase
+    private val getAllPreviewUseCase: GetAllPreviewUseCase,
+    private val searchByNamePreviewUseCase: SearchByNamePreviewUseCase,
+    private val searchMovieUseCase: SearchMovieUseCase
 ): ViewModel() {
 
     fun advancedSearchPreview(
@@ -28,7 +30,7 @@ class SearchViewModel @Inject constructor(
         )
     }
 
-    val getAllPreview: LiveData<List<PreviewUseCaseModel>> = startingSearchPreviewUseCase.getAllPreview
+    val getAllPreview: LiveData<List<PreviewUseCaseModel>> = getAllPreviewUseCase.getAllPreview
 
 
 
@@ -42,5 +44,9 @@ class SearchViewModel @Inject constructor(
         token: String
     ) { searchByNamePreviewUseCase.searchByNamePreview(
             nameField, search, isStrict, sortField, sortType, limit, token)
+    }
+
+    fun searchMovie(movieId: String, token: String) {
+        searchMovieUseCase.searchMovie(movieId, token)
     }
 }

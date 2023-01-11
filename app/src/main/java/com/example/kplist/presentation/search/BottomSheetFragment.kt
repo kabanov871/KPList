@@ -17,9 +17,7 @@ class BottomSheetFragment(private val advancedSearch:(
     nameField2: String,
     search2: String,
     sortField: String,
-    sortType: String,
-    limit: String,
-    token: String)->Unit
+    sortType: String)->Unit
 ) : BottomSheetDialogFragment(){
 
     lateinit var binding : FragmentBottomSheetBinding
@@ -85,9 +83,7 @@ class BottomSheetFragment(private val advancedSearch:(
                     Constance.SORT_GENRES,
                     binding.textGenres.text as String,
                     checkSort,
-                    Constance.FROM_LARGER_TO_SMALLER,
-                    Constance.LIMIT,
-                    Constance.TOKEN)
+                    Constance.FROM_LARGER_TO_SMALLER)
             dismiss()
 
         }

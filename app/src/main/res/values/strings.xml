@@ -9,6 +9,7 @@
     <string name="search2">Расширеный поиск</string>
     <string name="kp">Кинопоиск:</string>
     <string name="imdb">Imdb:</string>
+    <string name="critics">Критики:</string>
     <string name="adSearch">Расширеный поиск:</string>
     <string name="type">Тип:</string>
     <string name="selectedType">Выберите тип:</string>
@@ -19,6 +20,18 @@
 
     <string name="load">Загрузка</string>
     <string name="loadFail">Ошибка загрузки</string>
+
+    <string name="detail_trailer">trailer</string>
+    <string name="detail_country">country</string>
+    <string name="detail_fact">fact</string>
+
+    <string name="year">Год:</string>
+    <string name="country">Страны:</string>
+
+    <string name="person">Люди</string>
+    <string name="facts">Факты</string>
+    <string name="trailers">Трейлеры</string>
+    <string name="reviews">Отзывы</string>
 
     //for AlertDialogs
     <string name="movie">фильмы</string>

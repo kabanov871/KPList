@@ -5,7 +5,7 @@ import com.example.kplist.data.dataSource.localDataSource.LocalDataSourceReposit
 import com.example.kplist.data.dataSource.localDataSource.LocalDataSourceRepositoryImpl
 import com.example.kplist.data.dataSource.remoteDataSource.RemoteDataSourceRepository
 import com.example.kplist.data.dataSource.remoteDataSource.RemoteDataSourceRepositoryImpl
-import com.example.kplist.data.database.*
+import com.example.kplist.data.dataBase.*
 import com.example.kplist.data.network.ApiInterface
 import com.example.kplist.data.repositoryImpl.RepositoryImpl
 import com.example.kplist.domain.Repository
@@ -35,37 +35,25 @@ interface DataModule {
         @Provides
         @ApplicationScope
         fun providePreviewDao(application: Application): PreviewDao {
-            return KpDatabase.getInstance(application).PreviewDAO
+            return KpDatabase.getInstance(application).previewDAO
         }
 
         @Provides
         @ApplicationScope
-        fun provideDetailDao(application: Application): DetailDao {
-            return KpDatabase.getInstance(application).DetailDAO
+        fun provideMovieDao(application: Application): MovieDao {
+            return KpDatabase.getInstance(application).movieDAO
         }
 
         @Provides
         @ApplicationScope
         fun providePersonDao(application: Application): PersonDao {
-            return KpDatabase.getInstance(application).PersonDAO
+            return KpDatabase.getInstance(application).personDAO
         }
 
         @Provides
         @ApplicationScope
-        fun provideTrailerDao(application: Application): TrailerDao {
-            return KpDatabase.getInstance(application).TrailerDAO
-        }
-
-        @Provides
-        @ApplicationScope
-        fun provideCountryDao(application: Application): CountryDao {
-            return KpDatabase.getInstance(application).CountryDAO
-        }
-
-        @Provides
-        @ApplicationScope
-        fun provideFactDao(application: Application): FactDao {
-            return KpDatabase.getInstance(application).FactDAO
+        fun provideDetailDao(application: Application): DetailDao {
+            return KpDatabase.getInstance(application).detailDAO
         }
 
         @Provides

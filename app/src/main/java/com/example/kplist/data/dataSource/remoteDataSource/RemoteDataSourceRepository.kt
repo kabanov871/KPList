@@ -24,4 +24,6 @@ interface RemoteDataSourceRepository {
         limit: String,
         token: String
     )
+
+    suspend fun getMovie(id: String, token: String)
 }

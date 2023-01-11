@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_searchFragment_to_favouritesFragment"
             app:destination="@id/favouritesFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
     </fragment>
     <fragment
         android:id="@+id/favouritesFragment"
@@ -22,5 +25,46 @@
         <action
             android:id="@+id/action_favouritesFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_favouritesFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.example.kplist.presentation.movies.MovieFragment"
+        android:label="fragment_movie"
+        tools:layout="@layout/fragment_movie" >
+        <action
+            android:id="@+id/action_movieFragment_to_factsFragment"
+            app:destination="@id/factsFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_personFragment"
+            app:destination="@id/personFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_trailerFragment"
+            app:destination="@id/trailerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/factsFragment"
+        android:name="com.example.kplist.presentation.facts.FactsFragment"
+        android:label="fragment_facts"
+        tools:layout="@layout/fragment_facts" />
+    <fragment
+        android:id="@+id/personFragment"
+        android:name="com.example.kplist.presentation.persons.PersonFragment"
+        android:label="fragment_person"
+        tools:layout="@layout/fragment_person" />
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.example.kplist.presentation.reviews.ReviewFragment"
+        android:label="fragment_review"
+        tools:layout="@layout/fragment_review" />
+    <fragment
+        android:id="@+id/trailerFragment"
+        android:name="com.example.kplist.presentation.trailers.TrailerFragment"
+        android:label="fragment_trailer"
+        tools:layout="@layout/fragment_trailer" />
 </navigation>

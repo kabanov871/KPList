@@ -1,20 +1,16 @@
 package com.example.kplist.data.dataSource.localDataSource
 
 import androidx.lifecycle.LiveData
-import com.example.kplist.data.database.*
-import com.example.kplist.data.models.DbModels.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.kplist.data.dataBase.*
+import com.example.kplist.data.models.dbModels.*
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class LocalDataSourceRepositoryImpl @Inject constructor(
     private val previewDao: PreviewDao,
-    private val detailDao: DetailDao,
+    private val movieDao: MovieDao,
     private val personDao: PersonDao,
-    private val trailerDao: TrailerDao,
-    private val countryDao: CountryDao,
-    private val factDao: FactDao,
+    private val detailDao: DetailDao
 ): LocalDataSourceRepository{
 
     override fun insertPreview(previewModel: PreviewDbModel) {
@@ -31,16 +27,16 @@ class LocalDataSourceRepositoryImpl @Inject constructor(
 
 
 
-    override fun insertDetail(detailModel: DetailDbModel) {
+    override fun insertMovie(movieModel: MovieDbModel) {
         CoroutineScope(Dispatchers.IO).launch {
-            detailDao.insertDetail(detailModel)}
+            movieDao.insertMovie(movieModel)}
     }
-    override val allDetail: LiveData<List<DetailDbModel>>
-        get() = detailDao.getAllDetail()
+    override fun getMovie(id: Int): LiveData<MovieDbModel?> {
+        return movieDao.getMovie(id)}
 
-    override suspend fun clearDetail() {
+    override suspend fun clearMovie() {
         CoroutineScope(Dispatchers.IO).launch {
-            detailDao.clearDetail()}
+            movieDao.clearMovie()}
     }
 
 
@@ -57,41 +53,15 @@ class LocalDataSourceRepositoryImpl @Inject constructor(
     }
 
 
-    override fun insertTrailer(trailerModel: TrailerDbModel) {
+    override fun insertDetail(detailModel: DetailDbModel) {
         CoroutineScope(Dispatchers.IO).launch {
-            trailerDao.insertTrailer(trailerModel)}
+            detailDao.insertDetail(detailModel)}
     }
-    override val allTrailer: LiveData<List<TrailerDbModel>>
-        get() = trailerDao.getAllTrailer()
+    override fun getAllDetail(name: String): LiveData<List<DetailDbModel>> {
+        return detailDao.getAllDetail(name)}
 
-    override suspend fun clearTrailer() {
+    override suspend fun clearDetail() {
         CoroutineScope(Dispatchers.IO).launch {
-            trailerDao.clearTrailer()}
-    }
-
-
-    override fun insertCountry(countryModel: CountryDbModel) {
-        CoroutineScope(Dispatchers.IO).launch {
-            countryDao.insertCountry(countryModel)}
-    }
-    override val allCountry: LiveData<List<CountryDbModel>>
-        get() = countryDao.getAllCountry()
-
-    override suspend fun clearCountry() {
-        CoroutineScope(Dispatchers.IO).launch {
-            countryDao.clearCountry()}
-    }
-
-
-    override fun insertFact(factModel: FactDbModel) {
-        CoroutineScope(Dispatchers.IO).launch {
-            factDao.insertFact(factModel)}
-    }
-    override val allFact: LiveData<List<FactDbModel>>
-        get() = factDao.getAllFact()
-
-    override suspend fun clearFact() {
-        CoroutineScope(Dispatchers.IO).launch {
-            factDao.clearFact()}
+            detailDao.clearDetail()}
     }
 }
