@@ -4,5 +4,31 @@ import android.content.Context
 
 interface RemoteDataSourceRepository {
 
-    suspend fun startMigration()
+    suspend fun advancedSearchPreviewStartMigration(
+        nameField: String,
+        search: String,
+        nameField2: String,
+        search2: String,
+        sortField: String,
+        sortType: String,
+        limit: String,
+        token: String
+    )
+
+    suspend fun startingSearchPreviewStartMigration(
+        sortField: String,
+        sortType: String,
+        limit: String,
+        token: String
+    )
+
+    suspend fun searchByNamePreviewStartMigration(
+        nameField: String,
+        search: String,
+        isStrict: Boolean,
+        sortField: String,
+        sortType: String,
+        limit: String,
+        token: String
+    )
 }

@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.kplist.data.models.DbModels.PreviewDbModel
 
-@Database(entities = [PreviewDbModel::class], version = 2)
+@Database(entities = [PreviewDbModel::class], version = 4)
 abstract class KpDatabase: RoomDatabase() {
 
     abstract val PreviewDAO: PreviewDao
@@ -19,7 +19,7 @@ abstract class KpDatabase: RoomDatabase() {
                 var instance = INSTANCE
                 if(instance==null){
                     instance = Room.databaseBuilder(
-                        context.applicationContext, KpDatabase::class.java, "database2"
+                        context.applicationContext, KpDatabase::class.java, "database4"
                     ).build()
                 }
                 return instance

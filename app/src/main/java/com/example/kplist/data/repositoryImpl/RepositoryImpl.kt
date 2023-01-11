@@ -16,22 +16,75 @@ import javax.inject.Inject
 class RepositoryImpl @Inject constructor (
     private val localDataSourceRepository: LocalDataSourceRepository,
     private val remoteDataSourceRepository: RemoteDataSourceRepository,
-    private val mapper: Mapper,
-    private val api: ApiInterface
+    private val mapper: Mapper
         ): Repository{
 
-    override fun getList(): LiveData<List<PreviewUseCaseModel>> { //genres: String, sort: String
+    override fun advancedSearchPreview(
+        nameField: String,
+        search: String,
+        nameField2: String,
+        search2: String,
+        sortField: String,
+        sortType: String,
+        limit: String,
+        token: String
+    ): LiveData<List<PreviewUseCaseModel>> {
 
         CoroutineScope(Dispatchers.IO).launch{
 
         localDataSourceRepository.clearPreview()
-        remoteDataSourceRepository.startMigration()
+        remoteDataSourceRepository.advancedSearchPreviewStartMigration(
+            nameField, search, nameField2, search2, sortField, sortType, limit, token
+        )
         }
 
         return Transformations.map(localDataSourceRepository.getAllPreview()) {
             mapper.mapListPreviewDbModelToListPreviewUseCaseModel(it)
         }
 
+    }
+
+    override fun startingSearchPreview(
+        sortField: String,
+        sortType: String,
+        limit: String,
+        token: String
+    ): LiveData<List<PreviewUseCaseModel>> {
+
+        CoroutineScope(Dispatchers.IO).launch{
+
+            localDataSourceRepository.clearPreview()
+            remoteDataSourceRepository.startingSearchPreviewStartMigration(
+                sortField, sortType, limit, token
+            )
+        }
+
+        return Transformations.map(localDataSourceRepository.getAllPreview()) {
+            mapper.mapListPreviewDbModelToListPreviewUseCaseModel(it)
+        }
+    }
+
+    override fun searchByNamePreview(
+        nameField: String,
+        search: String,
+        isStrict: Boolean,
+        sortField: String,
+        sortType: String,
+        limit: String,
+        token: String
+    ): LiveData<List<PreviewUseCaseModel>> {
+
+        CoroutineScope(Dispatchers.IO).launch{
+
+            localDataSourceRepository.clearPreview()
+            remoteDataSourceRepository.searchByNamePreviewStartMigration(
+                nameField, search, isStrict, sortField, sortType, limit, token
+            )
+        }
+
+        return Transformations.map(localDataSourceRepository.getAllPreview()) {
+            mapper.mapListPreviewDbModelToListPreviewUseCaseModel(it)
+        }
     }
 
 }
