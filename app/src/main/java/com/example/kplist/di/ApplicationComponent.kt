@@ -1,7 +1,7 @@
 package com.example.kplist.di
 
 import android.app.Application
-import com.example.kplist.databinding.FragmentSearchBinding
+import com.example.kplist.presentation.search.SearchFragment
 import dagger.BindsInstance
 import dagger.Component
 
@@ -14,7 +14,7 @@ import dagger.Component
 )
 interface ApplicationComponent {
 
-    fun inject(fragment: FragmentSearchBinding)
+    fun inject(fragment: SearchFragment)
 
     @Component.Factory
     interface Factory {

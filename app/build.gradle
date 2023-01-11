@@ -43,6 +43,7 @@ dependencies {
     def retrofit_version = "2.9.0"
     def nav_version = "2.5.3"
     def lifecycle_version = "2.5.1"
+    def picasso = "2.8"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -76,5 +77,6 @@ dependencies {
     //noinspection LifecycleAnnotationProcessorWithJava8
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
-    implementation 'com.google.android.material:material:1.6.1'
+    //noinspection GradleDependency
+    implementation "com.squareup.picasso:picasso:$picasso"
 }
