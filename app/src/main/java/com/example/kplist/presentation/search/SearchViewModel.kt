@@ -3,6 +3,7 @@ package com.example.kplist.presentation.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.kplist.domain.detailsUseCase.SearchMovieUseCase
+import com.example.kplist.domain.detailsUseCase.SearchReviewUseCase
 import com.example.kplist.domain.previewUseCase.AdvancedSearchPreviewUseCase
 import com.example.kplist.domain.modelsUseCase.PreviewUseCaseModel
 import com.example.kplist.domain.previewUseCase.SearchByNamePreviewUseCase
@@ -13,7 +14,8 @@ class SearchViewModel @Inject constructor(
     private val advancedSearchPreviewUseCase: AdvancedSearchPreviewUseCase,
     private val getAllPreviewUseCase: GetAllPreviewUseCase,
     private val searchByNamePreviewUseCase: SearchByNamePreviewUseCase,
-    private val searchMovieUseCase: SearchMovieUseCase
+    private val searchMovieUseCase: SearchMovieUseCase,
+    private val searchReviewUseCase: SearchReviewUseCase
 ): ViewModel() {
 
     fun advancedSearchPreview(
@@ -48,5 +50,9 @@ class SearchViewModel @Inject constructor(
 
     fun searchMovie(movieId: String, token: String) {
         searchMovieUseCase.searchMovie(movieId, token)
+    }
+
+    fun searchReview(movieId: String) {
+        searchReviewUseCase.searchReview(movieId)
     }
 }

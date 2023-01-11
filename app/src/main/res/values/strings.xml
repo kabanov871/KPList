@@ -17,6 +17,8 @@
     <string name="selectedSort">Выберите сортировку:</string>
     <string name="genres">Жанр:</string>
     <string name="sort">Сортировка:</string>
+    <string name="author">Автор:</string>
+    <string name="youtube">Смотреть трейлер</string>
 
     <string name="load">Загрузка</string>
     <string name="loadFail">Ошибка загрузки</string>

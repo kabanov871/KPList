@@ -8,6 +8,7 @@ object Constance {
     const val TYPE_CARTOONS = "3"
     const val TYPE_ANIME = "4"
     const val TYPE_ANIME_SERIALS = "5"
+    const val REVIEWS_BY_ID = "movieId"
 
     const val SORT_GENRES = "genres.name"
 

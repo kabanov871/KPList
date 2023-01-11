@@ -3,6 +3,8 @@ package com.example.kplist.di
 import androidx.lifecycle.ViewModel
 import com.example.kplist.presentation.facts.FactViewModel
 import com.example.kplist.presentation.movies.MovieViewModel
+import com.example.kplist.presentation.persons.PersonViewModel
+import com.example.kplist.presentation.reviews.ReviewViewModel
 import com.example.kplist.presentation.search.SearchViewModel
 import dagger.Binds
 import dagger.Module
@@ -25,4 +27,14 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(FactViewModel::class)
     fun bindFactViewModel(viewModel: FactViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PersonViewModel::class)
+    fun bindPersonViewModel(viewModel: PersonViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReviewViewModel::class)
+    fun bindReviewViewModel(viewModel: ReviewViewModel): ViewModel
 }

@@ -57,6 +57,12 @@ interface DataModule {
         }
 
         @Provides
+        @ApplicationScope
+        fun provideReviewDao(application: Application): ReviewDao {
+            return KpDatabase.getInstance(application).reviewDAO
+        }
+
+        @Provides
         fun baseUrl() = "https://api.kinopoisk.dev/"
 
         @Provides
