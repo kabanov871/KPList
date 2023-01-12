@@ -6,6 +6,7 @@ import com.example.kplist.presentation.movies.MovieFragment
 import com.example.kplist.presentation.persons.PersonFragment
 import com.example.kplist.presentation.reviews.ReviewFragment
 import com.example.kplist.presentation.search.SearchFragment
+import com.example.kplist.presentation.searchByPerson.SearchByPersonFragment
 import com.example.kplist.presentation.trailers.TrailerFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -30,6 +31,8 @@ interface ApplicationComponent {
     fun inject(fragment: ReviewFragment)
 
     fun inject(fragment: TrailerFragment)
+
+    fun inject(fragment: SearchByPersonFragment)
 
     @Component.Factory
     interface Factory {

@@ -25,6 +25,12 @@ interface RemoteDataSourceRepository {
         token: String
     )
 
+    suspend fun searchPreviewByPersonStartMigration(
+        field: String,
+        personId: String,
+        token: String
+    )
+
     suspend fun getMovie(id: String, token: String)
 
     suspend fun getReview(field: String, movieId: String, limit: String, token: String)

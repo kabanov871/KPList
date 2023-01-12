@@ -7,7 +7,9 @@ import com.example.kplist.databinding.PersonItemBinding
 import com.example.kplist.domain.modelsUseCase.PersonUseCaseModel
 import com.squareup.picasso.Picasso
 
-class PersonAdapter: RecyclerView.Adapter<PersonAdapter.PersonHolder>() {
+class PersonAdapter(
+    private val searchPreviewByPerson: (personId: String) -> Unit
+): RecyclerView.Adapter<PersonAdapter.PersonHolder>() {
 
     private var personList = ArrayList<PersonUseCaseModel>()
 
@@ -22,7 +24,7 @@ class PersonAdapter: RecyclerView.Adapter<PersonAdapter.PersonHolder>() {
     }
 
     override fun onBindViewHolder(holder: PersonHolder, position: Int) {
-        holder.bind(personList[position])
+        holder.bind(personList[position], searchPreviewByPerson)
     }
 
     fun setList (list: List<PersonUseCaseModel>){
@@ -33,7 +35,8 @@ class PersonAdapter: RecyclerView.Adapter<PersonAdapter.PersonHolder>() {
     class PersonHolder(val binding: PersonItemBinding): RecyclerView.ViewHolder(binding.root){
 
 
-        fun bind(person: PersonUseCaseModel) {
+        fun bind(person: PersonUseCaseModel,
+                 searchPreviewByPerson:(personId: String)->Unit) {
 
             binding.apply {
 
@@ -41,6 +44,9 @@ class PersonAdapter: RecyclerView.Adapter<PersonAdapter.PersonHolder>() {
                 Picasso.get().load(getImage).into(imageViewPerson)
                 textViewProf.text = person.prof
                 textViewPersonName.text = person.name
+                cardView.setOnClickListener{
+                    searchPreviewByPerson(person.personId.toString())
+                }
 
             }
 

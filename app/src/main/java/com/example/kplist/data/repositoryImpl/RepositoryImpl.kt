@@ -6,10 +6,7 @@ import com.example.kplist.data.dataSource.localDataSource.LocalDataSourceReposit
 import com.example.kplist.data.dataSource.remoteDataSource.RemoteDataSourceRepository
 import com.example.kplist.data.mapper.Mapper
 import com.example.kplist.domain.Repository
-import com.example.kplist.domain.modelsUseCase.DetailUseCaseModel
-import com.example.kplist.domain.modelsUseCase.MovieUseCaseModel
-import com.example.kplist.domain.modelsUseCase.PersonUseCaseModel
-import com.example.kplist.domain.modelsUseCase.ReviewUseCaseModel
+import com.example.kplist.domain.modelsUseCase.*
 import com.example.kplist.presentation.Constance
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -42,6 +39,10 @@ class RepositoryImpl @Inject constructor (
     override val allPreview = Transformations.map(localDataSourceRepository.allPreview) {
             mapper.mapListPreviewDbModelToListPreviewUseCaseModel(it)
       }
+
+    override val allPreviewByPerson = Transformations.map(localDataSourceRepository.allPreviewByPerson) {
+        mapper.mapListPreviewByPersonDbModelToListPreviewByPersonUseCaseModel(it)
+    }
 
     override val getPerson = Transformations.map(localDataSourceRepository.allPerson) {
         mapper.mapListPersonDbModelToListPersonUseCaseModel(it)
@@ -97,6 +98,15 @@ class RepositoryImpl @Inject constructor (
         localDataSourceRepository.clearReview()
         remoteDataSourceRepository.getReview(
             Constance.REVIEWS_BY_ID, movieId, Constance.LIMIT, Constance.TOKEN)}
+    }
+
+    override fun searchPreviewByPerson(personId: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            localDataSourceRepository.clearPreviewByPerson()
+            remoteDataSourceRepository.searchPreviewByPersonStartMigration(
+                Constance.FIELD_BY_ID, personId, Constance.TOKEN
+            )
+        }
     }
 
 

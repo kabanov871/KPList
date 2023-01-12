@@ -9,10 +9,12 @@ import com.example.kplist.data.models.apiMovieModel.Country
 import com.example.kplist.data.models.apiMovieModel.Fact
 import com.example.kplist.data.models.apiMovieModel.Person
 import com.example.kplist.data.models.apiMovieModel.Trailer
+import com.example.kplist.data.models.apiPersonModel.Movy
 import com.example.kplist.data.models.apiPreviewModel.ApiPreviewModel
 import com.example.kplist.data.models.apiPreviewModel.Doc
 import com.example.kplist.data.models.dbModels.*
 import com.example.kplist.data.network.ApiInterface
+import com.example.kplist.presentation.Constance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
@@ -64,7 +66,7 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
         val factList = ArrayList<Fact>()
         val trailerList = ArrayList<Trailer>()
 
-        api.getMovie("id", id, token).let {
+        api.getMovie(Constance.FIELD_BY_ID, id, token).let {
 
             if (it.isSuccessful) {
 
@@ -166,6 +168,38 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
                     ).let { localDataSourceRepository.insertReview(it) }
                 }
             }
+        }
+    }
+
+    override suspend fun searchPreviewByPersonStartMigration(
+        field: String,
+        personId: String,
+        token: String
+    ) {
+        val movieInPersonList = ArrayList<Movy>()
+
+        api.searchReviewByPerson(field, personId, token).let {
+
+            if (it.isSuccessful) {
+
+                val response = it.body()
+                movieInPersonList.clear()
+                response?.movies?.let { it1 -> movieInPersonList.addAll(it1)}
+
+                for (audit in movieInPersonList) {
+
+                       PreviewByPersonDbModel(
+                           0,
+                           audit.id,
+                           audit.name,
+                           audit.description
+                       ).let {
+                           localDataSourceRepository.insertPreviewByPerson(it)
+                       }
+                }
+
+            } else withContext(Dispatchers.Main) {
+                Toast.makeText(application,  R.string.loadFail, Toast.LENGTH_SHORT).show()}
         }
     }
 

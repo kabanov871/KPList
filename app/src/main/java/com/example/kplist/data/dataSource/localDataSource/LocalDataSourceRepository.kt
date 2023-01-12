@@ -11,6 +11,12 @@ interface LocalDataSourceRepository {
 
     suspend fun clearPreview()
 
+    suspend fun insertPreviewByPerson(previewByPersonModel: PreviewByPersonDbModel)
+
+    val allPreviewByPerson: LiveData<List<PreviewByPersonDbModel>>
+
+    suspend fun clearPreviewByPerson()
+
 
     suspend fun insertMovie(movieModel: MovieDbModel)
 

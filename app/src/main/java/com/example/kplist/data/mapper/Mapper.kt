@@ -19,6 +19,18 @@ class Mapper @Inject constructor() {
         mapPreviewDbModelToPreviewUseCaseModel(it)
     }
 
+    fun mapPreviewByPersonDbModelToPreviewByPersonUseCaseModel(model: PreviewByPersonDbModel) = PreviewByPersonUseCaseModel(
+        id = model.id,
+        movieId = model.movieId,
+        name = model.name,
+        description = model.description
+
+    )
+
+    fun mapListPreviewByPersonDbModelToListPreviewByPersonUseCaseModel(list: List<PreviewByPersonDbModel>) = list.map {
+        mapPreviewByPersonDbModelToPreviewByPersonUseCaseModel(it)
+    }
+
     fun mapMovieDbModelToMovieUseCaseModel(model: MovieDbModel?) = model?.let {
         MovieUseCaseModel(
         movieId = it.movieId,

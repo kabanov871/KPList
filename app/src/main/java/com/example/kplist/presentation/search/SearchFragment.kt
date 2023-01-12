@@ -57,7 +57,7 @@ class SearchFragment : Fragment() {
         }
 
         binding.rw.layoutManager = GridLayoutManager(context, 2)
-        adapter = SearchAdapter ({ movieId: String -> searchMovie(movieId)})
+        adapter = SearchAdapter { movieId: String -> searchMovie(movieId) }
         binding.rw.adapter = adapter
 
         binding.button.setOnClickListener {
@@ -129,8 +129,5 @@ class SearchFragment : Fragment() {
         viewModel.searchReview(movieId)
         findNavController().navigate(R.id.action_searchFragment_to_movieFragment)
     }
-   // private fun openMovie() {
-  //      findNavController().navigate(R.id.action_searchFragment_to_movieFragment)
-  //  }
 
 }

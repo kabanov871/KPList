@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kplist.R
@@ -17,6 +18,7 @@ import com.example.kplist.presentation.MyApp
 import com.example.kplist.presentation.ViewModelFactory
 import com.example.kplist.presentation.facts.FactAdapter
 import com.example.kplist.presentation.facts.FactViewModel
+import com.example.kplist.presentation.searchByPerson.SearchByPersonViewModel
 import javax.inject.Inject
 
 class PersonFragment : Fragment() {
@@ -24,6 +26,7 @@ class PersonFragment : Fragment() {
     lateinit var binding: FragmentPersonBinding
     private lateinit var adapter: PersonAdapter
     private lateinit var viewModel: PersonViewModel
+    private lateinit var viewModelByPerson: SearchByPersonViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -45,8 +48,10 @@ class PersonFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory)[PersonViewModel::class.java]
 
+        viewModelByPerson = ViewModelProvider(this, viewModelFactory)[SearchByPersonViewModel::class.java]
+
         binding.rv.layoutManager = GridLayoutManager(context, 2)
-        adapter = PersonAdapter ()
+        adapter = PersonAdapter { personId: String -> searchPreviewByPerson(personId) }
         binding.rv.adapter = adapter
 
         displayStartPerson()
@@ -64,6 +69,11 @@ class PersonFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
+    }
+
+    private fun searchPreviewByPerson(personId: String) {
+        viewModelByPerson.searchPreviewByPerson(personId)
+        findNavController().navigate(R.id.action_personFragment_to_searchByPersonFragment)
     }
 
 }

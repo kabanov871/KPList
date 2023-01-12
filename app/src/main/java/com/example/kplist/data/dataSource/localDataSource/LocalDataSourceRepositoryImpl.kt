@@ -8,6 +8,7 @@ import javax.inject.Inject
 
 class LocalDataSourceRepositoryImpl @Inject constructor(
     private val previewDao: PreviewDao,
+    private val previewByPersonDao: PreviewByPersonDao,
     private val reviewDao: ReviewDao,
     private val movieDao: MovieDao,
     private val personDao: PersonDao,
@@ -24,6 +25,15 @@ class LocalDataSourceRepositoryImpl @Inject constructor(
             previewDao.clearPreview()
     }
 
+    override suspend fun insertPreviewByPerson(previewByPersonModel: PreviewByPersonDbModel) {
+        previewByPersonDao.insertPreviewByPerson(previewByPersonModel)
+    }
+    override val allPreviewByPerson: LiveData<List<PreviewByPersonDbModel>>
+        get() = previewByPersonDao.getAllPreviewByPerson()
+
+    override suspend fun clearPreviewByPerson() {
+        previewByPersonDao.clearPreviewByPerson()
+    }
 
 
     override suspend fun insertMovie(movieModel: MovieDbModel) {

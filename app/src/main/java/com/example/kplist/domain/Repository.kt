@@ -8,6 +8,8 @@ interface Repository {
 
     val allPreview: LiveData<List<PreviewUseCaseModel>>
 
+    val allPreviewByPerson: LiveData<List<PreviewByPersonUseCaseModel>>
+
     val getPerson: LiveData<List<PersonUseCaseModel>>
 
     val getReview: LiveData<List<ReviewUseCaseModel>>
@@ -40,5 +42,7 @@ interface Repository {
     fun getMovie(): LiveData<MovieUseCaseModel?>
 
     fun searchReview(movieId: String)
+
+    fun searchPreviewByPerson(personId: String)
 
 }

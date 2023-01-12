@@ -7,6 +7,7 @@ import com.example.kplist.domain.detailsUseCase.GetPersonUseCase
 import com.example.kplist.domain.modelsUseCase.DetailUseCaseModel
 import com.example.kplist.domain.modelsUseCase.PersonUseCaseModel
 import com.example.kplist.domain.modelsUseCase.PreviewUseCaseModel
+import com.example.kplist.domain.previewUseCase.SearchPreviewByPersonUseCase
 import javax.inject.Inject
 
 class PersonViewModel @Inject constructor(
@@ -14,4 +15,6 @@ class PersonViewModel @Inject constructor(
 ): ViewModel() {
 
     val getPerson: LiveData<List<PersonUseCaseModel>> = getPersonUseCase.getPerson
+
+
 }

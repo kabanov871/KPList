@@ -6,6 +6,7 @@ import com.example.kplist.presentation.movies.MovieViewModel
 import com.example.kplist.presentation.persons.PersonViewModel
 import com.example.kplist.presentation.reviews.ReviewViewModel
 import com.example.kplist.presentation.search.SearchViewModel
+import com.example.kplist.presentation.searchByPerson.SearchByPersonViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -17,6 +18,11 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(SearchViewModel::class)
     fun bindSearchViewModel(viewModel: SearchViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchByPersonViewModel::class)
+    fun bindSearchByPersonViewModel(viewModel: SearchByPersonViewModel): ViewModel
 
     @Binds
     @IntoMap

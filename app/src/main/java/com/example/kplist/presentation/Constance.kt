@@ -9,6 +9,7 @@ object Constance {
     const val TYPE_ANIME = "4"
     const val TYPE_ANIME_SERIALS = "5"
     const val REVIEWS_BY_ID = "movieId"
+    const val FIELD_BY_ID = "id"
 
     const val SORT_GENRES = "genres.name"
 
@@ -21,5 +22,5 @@ object Constance {
 
     const val LIMIT = "1000"
 
-    const val TOKEN = "ZQQ8GMN-TN54SGK-NB3MKEC-ZKB8V06"
+    const val TOKEN = "Y1HCG9A-GQW4V5Z-MQZ3A3N-C2TNH52" //ZQQ8GMN-TN54SGK-NB3MKEC-ZKB8V06
 }

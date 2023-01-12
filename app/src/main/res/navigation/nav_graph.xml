@@ -56,7 +56,11 @@
         android:id="@+id/personFragment"
         android:name="com.example.kplist.presentation.persons.PersonFragment"
         android:label="fragment_person"
-        tools:layout="@layout/fragment_person" />
+        tools:layout="@layout/fragment_person" >
+        <action
+            android:id="@+id/action_personFragment_to_searchByPersonFragment"
+            app:destination="@id/searchByPersonFragment" />
+    </fragment>
     <fragment
         android:id="@+id/reviewFragment"
         android:name="com.example.kplist.presentation.reviews.ReviewFragment"
@@ -67,4 +71,13 @@
         android:name="com.example.kplist.presentation.trailers.TrailerFragment"
         android:label="fragment_trailer"
         tools:layout="@layout/fragment_trailer" />
+    <fragment
+        android:id="@+id/searchByPersonFragment"
+        android:name="com.example.kplist.presentation.searchByPerson.SearchByPersonFragment"
+        android:label="fragment_search_by_person"
+        tools:layout="@layout/fragment_search_by_person" >
+        <action
+            android:id="@+id/action_searchByPersonFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+    </fragment>
 </navigation>
