@@ -11,6 +11,16 @@ interface LocalDataSourceRepository {
 
     suspend fun clearPreview()
 
+
+    suspend fun insertFavoritesPreview(favoritesPreviewModel: FavoritesPreviewDbModel)
+
+    val allFavoritesPreview: LiveData<List<FavoritesPreviewDbModel>>
+
+    fun checkFavoritesPreview(movieId: Int): Boolean
+
+    suspend fun deleteFavoritesPreview(movieId: Int)
+
+
     suspend fun insertPreviewByPerson(previewByPersonModel: PreviewByPersonDbModel)
 
     val allPreviewByPerson: LiveData<List<PreviewByPersonDbModel>>

@@ -20,6 +20,12 @@
     <string name="author">Автор:</string>
     <string name="youtube">Смотреть трейлер</string>
 
+    <string name="insert">Добавить в избранное</string>
+    <string name="delete">Удалить из избранного</string>
+
+    <string name="insert_toast">Добавленно в избранное</string>
+    <string name="delete_toast">Удалено из избранного</string>
+
     <string name="load">Загрузка</string>
     <string name="loadFail">Ошибка загрузки</string>
 

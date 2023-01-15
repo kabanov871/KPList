@@ -3,20 +3,21 @@ package com.example.kplist.presentation.search
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.kplist.R
 import com.example.kplist.databinding.FragmentSearchBinding
 import com.example.kplist.presentation.Constance
 import com.example.kplist.presentation.MyApp
 import com.example.kplist.presentation.ViewModelFactory
+import com.example.kplist.presentation.favorites.FavoritesViewModel
 import javax.inject.Inject
 
 
@@ -25,6 +26,7 @@ class SearchFragment : Fragment() {
     lateinit var binding: FragmentSearchBinding
     lateinit var adapter: SearchAdapter
     private lateinit var viewModel: SearchViewModel
+    private lateinit var favoritesViewModel: FavoritesViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -46,18 +48,23 @@ class SearchFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory)[SearchViewModel::class.java]
 
+        favoritesViewModel = ViewModelProvider(
+            this, viewModelFactory)[FavoritesViewModel::class.java]
+
         binding.bmenu.selectedItemId = R.id.item1
-        binding.bmenu.setOnNavigationItemSelectedListener {
+        binding.bmenu.setOnItemSelectedListener {
             when (it.itemId){
 
                 R.id.item2 ->{findNavController().navigate(R.id.action_searchFragment_to_favouritesFragment)}
 
             }
-            true
+            return@setOnItemSelectedListener true
         }
 
         binding.rw.layoutManager = GridLayoutManager(context, 2)
-        adapter = SearchAdapter { movieId: String -> searchMovie(movieId) }
+        adapter = SearchAdapter {movieId: String -> searchMovie(movieId)}
+
+
         binding.rw.adapter = adapter
 
         binding.button.setOnClickListener {
@@ -65,7 +72,7 @@ class SearchFragment : Fragment() {
         }
 
         binding.button2.setOnClickListener {
-            val panelCategory = BottomSheetFragment { nameField: String,
+            val fragment = BottomSheetFragment { nameField: String,
                                                       search: String,
                                                       nameField2: String,
                                                       search2: String,
@@ -75,11 +82,7 @@ class SearchFragment : Fragment() {
                     nameField, search, nameField2, search2, sortField, sortType
                 )
             }
-            val parameters = Bundle()
-            parameters.putString("idCategory", "wordEntity.hint")
-            panelCategory.arguments = parameters
-
-            panelCategory.show((context as FragmentActivity).supportFragmentManager, "editCategory")
+            fragment.show((context as FragmentActivity).supportFragmentManager, "advancedSearch")
         }
 
         displayStartPreview()
@@ -128,6 +131,11 @@ class SearchFragment : Fragment() {
         viewModel.searchMovie(movieId, Constance.TOKEN)
         viewModel.searchReview(movieId)
         findNavController().navigate(R.id.action_searchFragment_to_movieFragment)
+    }
+
+    private fun checkFavorites(movieId: Int): Boolean {
+
+        return favoritesViewModel.checkFavoritesPreview(movieId)
     }
 
 }

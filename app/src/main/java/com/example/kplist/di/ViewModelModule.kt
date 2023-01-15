@@ -2,6 +2,7 @@ package com.example.kplist.di
 
 import androidx.lifecycle.ViewModel
 import com.example.kplist.presentation.facts.FactViewModel
+import com.example.kplist.presentation.favorites.FavoritesViewModel
 import com.example.kplist.presentation.movies.MovieViewModel
 import com.example.kplist.presentation.persons.PersonViewModel
 import com.example.kplist.presentation.reviews.ReviewViewModel
@@ -43,4 +44,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(ReviewViewModel::class)
     fun bindReviewViewModel(viewModel: ReviewViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FavoritesViewModel::class)
+    fun bindFavoritesViewModel(viewModel: FavoritesViewModel): ViewModel
 }

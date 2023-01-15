@@ -1,12 +1,15 @@
 package com.example.kplist.domain
 
 import androidx.lifecycle.LiveData
+import com.example.kplist.data.models.dbModels.FavoritesPreviewDbModel
 import com.example.kplist.data.models.dbModels.MovieDbModel
 import com.example.kplist.domain.modelsUseCase.*
 
 interface Repository {
 
     val allPreview: LiveData<List<PreviewUseCaseModel>>
+
+    val allFavoritesPreview: LiveData<List<FavoritesPreviewUseCaseModel>>
 
     val allPreviewByPerson: LiveData<List<PreviewByPersonUseCaseModel>>
 
@@ -44,5 +47,11 @@ interface Repository {
     fun searchReview(movieId: String)
 
     fun searchPreviewByPerson(personId: String)
+
+    fun insertFavoritesPreview(movieId: Int)
+
+    fun checkFavoritesPreview(movieId: Int): Boolean
+
+    fun deleteFavoritesPreview(movieId: Int)
 
 }

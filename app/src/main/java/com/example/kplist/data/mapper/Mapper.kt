@@ -19,6 +19,41 @@ class Mapper @Inject constructor() {
         mapPreviewDbModelToPreviewUseCaseModel(it)
     }
 
+    fun mapFavoritesPreviewDbModelToFavoritesPreviewUseCaseModel(model: FavoritesPreviewDbModel) = FavoritesPreviewUseCaseModel(
+        id = model.movieId,
+        poster = model.poster,
+        name = model.name,
+        year = model.year,
+        ratingKp = model.ratingKp,
+        ratingImdb = model.ratingImdb
+    )
+
+    fun mapFavoritesPreviewDbModelToFavoritesPreviewUseCaseModelCheckNull(model: FavoritesPreviewDbModel?) =
+        model?.movieId?.let {
+            FavoritesPreviewUseCaseModel(
+            id = it,
+            poster = model.poster,
+            name = model.name,
+            year = model.year,
+            ratingKp = model.ratingKp,
+            ratingImdb = model.ratingImdb
+        )
+        }
+
+    fun mapFavoritesPreviewUseCaseModelToFavoritesPreviewDbModel(model: FavoritesPreviewUseCaseModel) = FavoritesPreviewDbModel(
+        id = 0,
+        movieId = model.id,
+        poster = model.poster,
+        name = model.name,
+        year = model.year,
+        ratingKp = model.ratingKp,
+        ratingImdb = model.ratingImdb
+    )
+
+    fun mapListFavoritesPreviewDbModelToListFavoritesPreviewUseCaseModel(list: List<FavoritesPreviewDbModel>) = list.map {
+        mapFavoritesPreviewDbModelToFavoritesPreviewUseCaseModel(it)
+    }
+
     fun mapPreviewByPersonDbModelToPreviewByPersonUseCaseModel(model: PreviewByPersonDbModel) = PreviewByPersonUseCaseModel(
         id = model.id,
         movieId = model.movieId,

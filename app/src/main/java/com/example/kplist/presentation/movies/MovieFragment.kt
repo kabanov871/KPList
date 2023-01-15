@@ -2,21 +2,18 @@ package com.example.kplist.presentation.movies
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.kplist.R
-import com.example.kplist.data.models.apiMovieModel.Person
 import com.example.kplist.databinding.FragmentMovieBinding
-import com.example.kplist.databinding.FragmentSearchBinding
-import com.example.kplist.domain.modelsUseCase.DetailUseCaseModel
-import com.example.kplist.presentation.Constance
 import com.example.kplist.presentation.MyApp
 import com.example.kplist.presentation.ViewModelFactory
-import com.example.kplist.presentation.search.SearchViewModel
+import com.example.kplist.presentation.favorites.FavoritesViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -26,6 +23,7 @@ class MovieFragment : Fragment() {
 
     lateinit var binding: FragmentMovieBinding
     private lateinit var viewModel: MovieViewModel
+    private lateinit var favoritesViewModel: FavoritesViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -47,10 +45,15 @@ class MovieFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory)[MovieViewModel::class.java]
 
+        favoritesViewModel = ViewModelProvider(
+            this, viewModelFactory)[FavoritesViewModel::class.java]
+
          viewModel.getMovie().observe(viewLifecycleOwner) {
+
             val response = it
 
                 if (response != null) {
+                    val check = response.movieId
                     binding.textViewRatingKp.text = response.ratingKp.toString()
                     binding.textViewRatingImdb.text = response.ratingImdb.toString()
                     binding.textViewRatingCritics.text = response.ratingCritic.toString()
@@ -59,12 +62,44 @@ class MovieFragment : Fragment() {
                     Picasso.get().load(getImage).into(binding.imageViewPoster)
                     binding.textYear.text = response.year
                     binding.textDesc.text = response.description
+
+                    CoroutineScope(Dispatchers.IO).launch {
+
+                        val exists = favoritesViewModel.checkFavoritesPreview(check)
+
+                        if (!exists) {
+
+                            binding.buttonCheck.text = resources.getString(R.string.insert)
+
+                            binding.buttonCheck.setOnClickListener {
+
+                                favoritesViewModel.insertFavoritesPreview(check)
+                                binding.buttonCheck.visibility = View.INVISIBLE
+                            }
+
+                        }
+                        if (exists) {
+
+                            binding.buttonCheck.text = resources.getString(R.string.delete)
+
+                            binding.buttonCheck.setOnClickListener {
+
+                                favoritesViewModel.deleteFavoritesPreview(check)
+                                Toast.makeText(
+                                    context, R.string.delete_toast, Toast.LENGTH_SHORT).show()
+                                binding.buttonCheck.visibility = View.INVISIBLE
+                            }
+
+                        }
+                    }
+
                 }
          }
 
+
             viewModel.getDetail(R.string.detail_country.toString()).observe(viewLifecycleOwner) {
                 if (it.isEmpty()) {
-                    binding.textView17.setVisibility(View.INVISIBLE)
+                    binding.textView17.visibility = View.INVISIBLE
                 }
                 if (it.size == 1) {
                     binding.country1.text = it[0].value
@@ -102,5 +137,4 @@ class MovieFragment : Fragment() {
 
         return binding.root
     }
-
 }

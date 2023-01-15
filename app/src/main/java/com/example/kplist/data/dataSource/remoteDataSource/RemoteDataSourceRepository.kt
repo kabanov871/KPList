@@ -34,4 +34,6 @@ interface RemoteDataSourceRepository {
     suspend fun getMovie(id: String, token: String)
 
     suspend fun getReview(field: String, movieId: String, limit: String, token: String)
+
+    suspend fun insertFavoritesPreview(movieId: Int)
 }

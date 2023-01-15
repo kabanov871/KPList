@@ -39,6 +39,9 @@ class RepositoryImpl @Inject constructor (
     override val allPreview = Transformations.map(localDataSourceRepository.allPreview) {
             mapper.mapListPreviewDbModelToListPreviewUseCaseModel(it)
       }
+    override val allFavoritesPreview = Transformations.map(localDataSourceRepository.allFavoritesPreview) {
+        mapper.mapListFavoritesPreviewDbModelToListFavoritesPreviewUseCaseModel(it)
+    }
 
     override val allPreviewByPerson = Transformations.map(localDataSourceRepository.allPreviewByPerson) {
         mapper.mapListPreviewByPersonDbModelToListPreviewByPersonUseCaseModel(it)
@@ -106,6 +109,23 @@ class RepositoryImpl @Inject constructor (
             remoteDataSourceRepository.searchPreviewByPersonStartMigration(
                 Constance.FIELD_BY_ID, personId, Constance.TOKEN
             )
+        }
+    }
+
+    override fun insertFavoritesPreview(movieId: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            remoteDataSourceRepository.insertFavoritesPreview(movieId)
+        }
+    }
+
+    override fun checkFavoritesPreview(movieId: Int): Boolean {
+            return localDataSourceRepository.checkFavoritesPreview(movieId)
+
+    }
+
+    override fun deleteFavoritesPreview(movieId: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            localDataSourceRepository.deleteFavoritesPreview(movieId)
         }
     }
 

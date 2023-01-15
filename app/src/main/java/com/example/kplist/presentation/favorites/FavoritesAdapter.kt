@@ -1,40 +1,39 @@
-package com.example.kplist.presentation.search
+package com.example.kplist.presentation.favorites
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kplist.databinding.MovieItemBinding
-import com.example.kplist.domain.modelsUseCase.PreviewUseCaseModel
+import com.example.kplist.domain.modelsUseCase.FavoritesPreviewUseCaseModel
 import com.squareup.picasso.Picasso
 
-class SearchAdapter (private val searchMovie: (movieId: String) -> Unit
-) : RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
+class FavoritesAdapter (private val searchMovie: (movieId: String) -> Unit) : RecyclerView.Adapter<FavoritesAdapter.FavoritesHolder>(){
 
-    private var cardList = ArrayList<PreviewUseCaseModel>()
+    private var cardList = ArrayList<FavoritesPreviewUseCaseModel>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesHolder {
 
         val binding : MovieItemBinding = MovieItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SearchHolder(binding)
+        return FavoritesHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return cardList.size
     }
 
-    override fun onBindViewHolder(holder: SearchHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoritesHolder, position: Int) {
         holder.bind(cardList[position], searchMovie)
     }
 
-    fun setList (list: List<PreviewUseCaseModel>){
+    fun setList (list: List<FavoritesPreviewUseCaseModel>){
         cardList.clear()
         cardList.addAll(list)
     }
 
-    class SearchHolder(val binding: MovieItemBinding): RecyclerView.ViewHolder(binding.root){
+    class FavoritesHolder(val binding: MovieItemBinding): RecyclerView.ViewHolder(binding.root){
 
 
-        fun bind(card: PreviewUseCaseModel,
+        fun bind(card: FavoritesPreviewUseCaseModel,
                  searchMovie:(movieId: String)->Unit) {
 
             binding.apply {
@@ -44,6 +43,7 @@ class SearchAdapter (private val searchMovie: (movieId: String) -> Unit
                 textViewImdb.text = card.ratingImdb.toString()
                 textViewName.text = card.name
                 textViewYear.text = card.year
+
                 cardView.setOnClickListener {
                     searchMovie(card.id.toString())
                 }

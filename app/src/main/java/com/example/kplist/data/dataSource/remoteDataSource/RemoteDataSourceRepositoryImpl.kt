@@ -171,6 +171,39 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun insertFavoritesPreview(movieId: Int) {
+        api.getMovie(Constance.FIELD_BY_ID, movieId.toString(), Constance.TOKEN).let {
+
+            if (it.isSuccessful) {
+
+                withContext(Dispatchers.Main){
+
+                    Toast.makeText(application, R.string.insert_toast, Toast.LENGTH_SHORT).show()
+                }
+
+                val response = it.body()
+                if (response != null) {
+
+                    localDataSourceRepository.insertFavoritesPreview(
+                        FavoritesPreviewDbModel(
+                            0,
+                            response.id,
+                            response.poster?.url,
+                            response.name,
+                            response.year.toString(),
+                            response.rating?.kp,
+                            response.rating?.imdb
+                        )
+                    )
+                }
+            } else {
+                withContext(Dispatchers.Main){
+
+                Toast.makeText(application, R.string.loadFail, Toast.LENGTH_SHORT).show()
+            }}
+        }
+    }
+
     override suspend fun searchPreviewByPersonStartMigration(
         field: String,
         personId: String,
@@ -188,14 +221,20 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
 
                 for (audit in movieInPersonList) {
 
-                       PreviewByPersonDbModel(
-                           0,
-                           audit.id,
-                           audit.name,
-                           audit.description
-                       ).let {
-                           localDataSourceRepository.insertPreviewByPerson(it)
-                       }
+                    audit.id.let {
+
+                        audit.name?.let { it2 ->
+
+                            PreviewByPersonDbModel(
+                                0,
+                                audit.id,
+                                it2,
+                                audit.description
+                            ).let {
+                                localDataSourceRepository.insertPreviewByPerson(it)
+                            }
+                        }
+                    }
                 }
 
             } else withContext(Dispatchers.Main) {
@@ -220,17 +259,19 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
             for (audit in list) {
 
                 audit.id.let { it1 ->
+                    audit.name?.let { it2 ->
                         PreviewDbModel(
                             0,
                             it1,
                             audit.poster?.previewUrl,
-                            audit.name,
+                            it2,
                             audit.year.toString(),
                             audit.rating?.kp,
                             audit.rating?.imdb
                         ).let {
                             localDataSourceRepository.insertPreview(it)
                         }
+                    }
                 }
 
             }

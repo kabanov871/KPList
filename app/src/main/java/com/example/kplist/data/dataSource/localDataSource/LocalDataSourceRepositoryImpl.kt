@@ -8,6 +8,7 @@ import javax.inject.Inject
 
 class LocalDataSourceRepositoryImpl @Inject constructor(
     private val previewDao: PreviewDao,
+    private val favoritesPreviewDao: FavoritesPreviewDao,
     private val previewByPersonDao: PreviewByPersonDao,
     private val reviewDao: ReviewDao,
     private val movieDao: MovieDao,
@@ -23,6 +24,21 @@ class LocalDataSourceRepositoryImpl @Inject constructor(
 
     override suspend fun clearPreview() {
             previewDao.clearPreview()
+    }
+
+    override suspend fun insertFavoritesPreview(favoritesPreviewModel: FavoritesPreviewDbModel) {
+        favoritesPreviewDao.insertFavoritesPreview(favoritesPreviewModel)
+    }
+
+    override val allFavoritesPreview: LiveData<List<FavoritesPreviewDbModel>>
+        get() = favoritesPreviewDao.getAllFavoritesPreview()
+
+    override fun checkFavoritesPreview(movieId: Int): Boolean {
+        return favoritesPreviewDao.checkFavoritesPreview(movieId)
+    }
+
+    override suspend fun deleteFavoritesPreview(movieId: Int) {
+        favoritesPreviewDao.deleteFavoritesPreview(movieId)
     }
 
     override suspend fun insertPreviewByPerson(previewByPersonModel: PreviewByPersonDbModel) {

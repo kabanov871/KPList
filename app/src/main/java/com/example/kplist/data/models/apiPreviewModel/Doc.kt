@@ -9,7 +9,7 @@ data class Doc(
     val id: Int,
     val logo: Logo,
     val movieLength: Int,
-    val name: String,
+    val name: String?,
     val names: List<Name>,
     val poster: Poster?,
     val rating: Rating?,

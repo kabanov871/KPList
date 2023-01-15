@@ -2,6 +2,7 @@ package com.example.kplist.di
 
 import android.app.Application
 import com.example.kplist.presentation.facts.FactsFragment
+import com.example.kplist.presentation.favorites.FavouritesFragment
 import com.example.kplist.presentation.movies.MovieFragment
 import com.example.kplist.presentation.persons.PersonFragment
 import com.example.kplist.presentation.reviews.ReviewFragment
@@ -33,6 +34,8 @@ interface ApplicationComponent {
     fun inject(fragment: TrailerFragment)
 
     fun inject(fragment: SearchByPersonFragment)
+
+    fun inject(fragment: FavouritesFragment)
 
     @Component.Factory
     interface Factory {

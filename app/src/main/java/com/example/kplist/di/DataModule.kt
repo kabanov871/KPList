@@ -40,6 +40,12 @@ interface DataModule {
 
         @Provides
         @ApplicationScope
+        fun provideFavoritesPreviewDao(application: Application): FavoritesPreviewDao {
+            return KpDatabase.getInstance(application).favoritesPreviewDAO
+        }
+
+        @Provides
+        @ApplicationScope
         fun providePreviewByPersonDao(application: Application): PreviewByPersonDao {
             return KpDatabase.getInstance(application).previewByPersonDAO
         }

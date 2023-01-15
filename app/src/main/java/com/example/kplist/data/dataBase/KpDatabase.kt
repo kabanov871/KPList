@@ -9,13 +9,15 @@ import com.example.kplist.data.models.dbModels.*
 @Database(entities = [
     PreviewDbModel::class,
     PreviewByPersonDbModel::class,
+    FavoritesPreviewDbModel::class,
     ReviewDbModel::class,
     MovieDbModel::class,
     PersonDbModel::class,
-    DetailDbModel::class], version = 15)
+    DetailDbModel::class], version = 16)
 abstract class KpDatabase: RoomDatabase() {
 
     abstract val previewDAO: PreviewDao
+    abstract val favoritesPreviewDAO: FavoritesPreviewDao
     abstract val previewByPersonDAO: PreviewByPersonDao
     abstract val reviewDAO: ReviewDao
     abstract val movieDAO: MovieDao
@@ -30,7 +32,7 @@ abstract class KpDatabase: RoomDatabase() {
                 var instance = INSTANCE
                 if(instance==null){
                     instance = Room.databaseBuilder(
-                        context.applicationContext, KpDatabase::class.java, "database15"
+                        context.applicationContext, KpDatabase::class.java, "database16"
                     ).build()
                 }
                 return instance
