@@ -3,6 +3,7 @@ package com.example.kplist.presentation.search
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kplist.R
 import com.example.kplist.databinding.MovieItemBinding
 import com.example.kplist.domain.modelsUseCase.PreviewUseCaseModel
 import com.squareup.picasso.Picasso
@@ -38,8 +39,15 @@ class SearchAdapter (private val searchMovie: (movieId: String) -> Unit
                  searchMovie:(movieId: String)->Unit) {
 
             binding.apply {
-                val getImage = card.poster
-                Picasso.get().load(getImage).into(imageView)
+
+                if (card.poster == null) {
+                    val getImage = R.drawable.no_poster
+                    Picasso.get().load(getImage).into(imageView)
+                } else {
+                    val getImage = card.poster
+                    Picasso.get().load(getImage).into(imageView)
+                }
+
                 textViewKp.text = card.ratingKp.toString()
                 textViewImdb.text = card.ratingImdb.toString()
                 textViewName.text = card.name

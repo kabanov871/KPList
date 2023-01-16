@@ -53,13 +53,13 @@ class FavouritesFragment : Fragment() {
         binding.rw.adapter = adapter
 
         binding.bmenu.selectedItemId = R.id.item2
-        binding.bmenu.setOnNavigationItemSelectedListener {
+        binding.bmenu.setOnItemSelectedListener {
             when (it.itemId){
 
                 R.id.item1 ->{findNavController().navigate(R.id.action_favouritesFragment_to_searchFragment)}
 
             }
-            true
+            return@setOnItemSelectedListener true
         }
 
         displayStartPreview()

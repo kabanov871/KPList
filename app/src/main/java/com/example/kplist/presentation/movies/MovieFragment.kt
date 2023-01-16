@@ -98,9 +98,7 @@ class MovieFragment : Fragment() {
 
 
             viewModel.getDetail(R.string.detail_country.toString()).observe(viewLifecycleOwner) {
-                if (it.isEmpty()) {
-                    binding.textView17.visibility = View.INVISIBLE
-                }
+
                 if (it.size == 1) {
                     binding.country1.text = it[0].value
                 }

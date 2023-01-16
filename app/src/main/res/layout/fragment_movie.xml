@@ -36,6 +36,64 @@
                 android:textColor="@color/black" />
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonPerson"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/orange"
+                    android:text="@string/person"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/buttonFact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/orange"
+                    android:text="@string/facts"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/buttonTrailer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/orange"
+                    android:text="@string/trailers"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/buttonReview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/orange"
+                    android:text="@string/reviews"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -186,66 +244,9 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="30dp"
                 android:gravity="center"
                 android:textColor="@color/orange" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="50dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/buttonPerson"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/orange"
-                    android:text="@string/person"
-                    android:textColor="@color/black" />
-
-                <Button
-                    android:id="@+id/buttonFact"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/orange"
-                    android:text="@string/facts"
-                    android:textColor="@color/black" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/buttonTrailer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/orange"
-                    android:text="@string/trailers"
-                    android:textColor="@color/black" />
-
-                <Button
-                    android:id="@+id/buttonReview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/orange"
-                    android:text="@string/reviews"
-                    android:textColor="@color/black" />
-            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
