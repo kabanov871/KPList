@@ -13,7 +13,7 @@ data class ApiPersonModel(
     val facts: List<Fact>,
     val growth: Int,
     val id: Int,
-    val movies: List<Movy>,
+    val movies: List<Movy>?,
     val name: String,
     val photo: String,
     val profession: List<Profession>,

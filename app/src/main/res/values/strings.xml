@@ -21,6 +21,7 @@
     <string name="youtube">Смотреть трейлер</string>
 
     <string name="insert">Добавить в избранное</string>
+    <string name="insert_done">Добавленно в избранное</string>
     <string name="delete">Удалить из избранного</string>
 
     <string name="insert_toast">Добавленно в избранное</string>

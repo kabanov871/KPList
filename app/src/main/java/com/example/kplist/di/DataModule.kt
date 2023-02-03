@@ -6,6 +6,8 @@ import com.example.kplist.data.dataSource.localDataSource.LocalDataSourceReposit
 import com.example.kplist.data.dataSource.remoteDataSource.RemoteDataSourceRepository
 import com.example.kplist.data.dataSource.remoteDataSource.RemoteDataSourceRepositoryImpl
 import com.example.kplist.data.dataBase.*
+import com.example.kplist.data.dataSource.remoteDataSource.Toasts
+import com.example.kplist.data.dataSource.remoteDataSource.ToastsImpl
 import com.example.kplist.data.network.ApiInterface
 import com.example.kplist.data.repositoryImpl.RepositoryImpl
 import com.example.kplist.domain.Repository
@@ -25,6 +27,10 @@ interface DataModule {
     @Binds
     @ApplicationScope
     fun bindRemoteDataSourceRepository(impl: RemoteDataSourceRepositoryImpl): RemoteDataSourceRepository
+
+    @Binds
+    @ApplicationScope
+    fun bindToasts(impl: ToastsImpl): Toasts
 
     @Binds
     @ApplicationScope

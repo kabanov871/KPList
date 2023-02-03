@@ -1,5 +1,6 @@
 package com.example.kplist.presentation.movies
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -37,6 +38,7 @@ class MovieFragment : Fragment() {
         super.onAttach(context)
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

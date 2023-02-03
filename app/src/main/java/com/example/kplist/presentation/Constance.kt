@@ -22,5 +22,5 @@ object Constance {
 
     const val LIMIT = "1000"
 
-    const val TOKEN = "ZQQ8GMN-TN54SGK-NB3MKEC-ZKB8V06"
+    const val TOKEN = "ZQD1R2R-ABQ4GFB-NBWVDDN-9H87BDH"
 }
