@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test
 
 class RepositoryImplTest {
 
-    val localDataSourceRepository = mockk<LocalDataSourceRepository>(relaxed = true)
-    val remoteDataSourceRepository = mockk<RemoteDataSourceRepository>()
-    val mapper = mockk<Mapper>()
+    private val localDataSourceRepository = mockk<LocalDataSourceRepository>(relaxed = true)
+    private val remoteDataSourceRepository = mockk<RemoteDataSourceRepository>()
+    private val mapper = mockk<Mapper>()
 
     @AfterEach
     fun afterEach() {
@@ -75,14 +75,6 @@ class RepositoryImplTest {
                 limit = "limitTest",
                 token = "tokenTest") }
 
-        coVerify(exactly = 1) {
-            localDataSourceRepository.allPreview
-            localDataSourceRepository.allFavoritesPreview
-            localDataSourceRepository.allPreviewByPerson
-            localDataSourceRepository.allPerson
-            localDataSourceRepository.allReview
-        }
-
         confirmVerified(localDataSourceRepository, remoteDataSourceRepository)
     }
 
@@ -137,14 +129,6 @@ class RepositoryImplTest {
                 limit = "limitTest",
                 token = "tokenTest") }
 
-        coVerify(exactly = 1) {
-            localDataSourceRepository.allPreview
-            localDataSourceRepository.allFavoritesPreview
-            localDataSourceRepository.allPreviewByPerson
-            localDataSourceRepository.allPerson
-            localDataSourceRepository.allReview
-        }
-
         confirmVerified(localDataSourceRepository, remoteDataSourceRepository)
     }
 
@@ -187,14 +171,6 @@ class RepositoryImplTest {
             )
         }
 
-        coVerify(exactly = 1) {
-            localDataSourceRepository.allPreview
-            localDataSourceRepository.allFavoritesPreview
-            localDataSourceRepository.allPreviewByPerson
-            localDataSourceRepository.allPerson
-            localDataSourceRepository.allReview
-        }
-
         confirmVerified(localDataSourceRepository, remoteDataSourceRepository)
     }
 
@@ -211,14 +187,6 @@ class RepositoryImplTest {
 
         coVerify(exactly = 1) {
             localDataSourceRepository.getAllDetail("nameTest")
-        }
-
-        coVerify(exactly = 1) {
-            localDataSourceRepository.allPreview
-            localDataSourceRepository.allFavoritesPreview
-            localDataSourceRepository.allPreviewByPerson
-            localDataSourceRepository.allPerson
-            localDataSourceRepository.allReview
         }
 
         confirmVerified(localDataSourceRepository)
@@ -238,14 +206,6 @@ class RepositoryImplTest {
 
         coVerify(exactly = 1) {
             localDataSourceRepository.getMovie(1)
-        }
-
-        coVerify(exactly = 1) {
-            localDataSourceRepository.allPreview
-            localDataSourceRepository.allFavoritesPreview
-            localDataSourceRepository.allPreviewByPerson
-            localDataSourceRepository.allPerson
-            localDataSourceRepository.allReview
         }
 
         confirmVerified(localDataSourceRepository)
@@ -286,14 +246,6 @@ class RepositoryImplTest {
             )
         }
 
-        coVerify(exactly = 1) {
-            localDataSourceRepository.allPreview
-            localDataSourceRepository.allFavoritesPreview
-            localDataSourceRepository.allPreviewByPerson
-            localDataSourceRepository.allPerson
-            localDataSourceRepository.allReview
-        }
-
         confirmVerified(localDataSourceRepository, remoteDataSourceRepository)
     }
 
@@ -330,14 +282,6 @@ class RepositoryImplTest {
             )
         }
 
-        coVerify(exactly = 1) {
-            localDataSourceRepository.allPreview
-            localDataSourceRepository.allFavoritesPreview
-            localDataSourceRepository.allPreviewByPerson
-            localDataSourceRepository.allPerson
-            localDataSourceRepository.allReview
-        }
-
         confirmVerified(localDataSourceRepository, remoteDataSourceRepository)
     }
 
@@ -359,14 +303,6 @@ class RepositoryImplTest {
             remoteDataSourceRepository.insertFavoritesPreview(movieId = 1)
         }
 
-        coVerify(exactly = 1) {
-            localDataSourceRepository.allPreview
-            localDataSourceRepository.allFavoritesPreview
-            localDataSourceRepository.allPreviewByPerson
-            localDataSourceRepository.allPerson
-            localDataSourceRepository.allReview
-        }
-
         confirmVerified(localDataSourceRepository, remoteDataSourceRepository)
     }
 
@@ -383,14 +319,6 @@ class RepositoryImplTest {
 
         coVerify(exactly = 1) {
             localDataSourceRepository.checkFavoritesPreview(movieId = 1)
-        }
-
-        coVerify(exactly = 1) {
-            localDataSourceRepository.allPreview
-            localDataSourceRepository.allFavoritesPreview
-            localDataSourceRepository.allPreviewByPerson
-            localDataSourceRepository.allPerson
-            localDataSourceRepository.allReview
         }
 
         confirmVerified(localDataSourceRepository)
@@ -412,11 +340,98 @@ class RepositoryImplTest {
             localDataSourceRepository.deleteFavoritesPreview(movieId = 1)
         }
 
+        confirmVerified(localDataSourceRepository)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun allPreviewTest() = runTest {
+
+        val repositoryImpl = RepositoryImpl(
+            localDataSourceRepository = localDataSourceRepository,
+            remoteDataSourceRepository = remoteDataSourceRepository,
+            mapper = mapper
+        )
+
+        repositoryImpl.allPreview
+
         coVerify(exactly = 1) {
             localDataSourceRepository.allPreview
+        }
+
+        confirmVerified(localDataSourceRepository)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun allFavoritesPreviewTest() = runTest {
+
+        val repositoryImpl = RepositoryImpl(
+            localDataSourceRepository = localDataSourceRepository,
+            remoteDataSourceRepository = remoteDataSourceRepository,
+            mapper = mapper
+        )
+
+        repositoryImpl.allFavoritesPreview
+
+        coVerify(exactly = 1) {
             localDataSourceRepository.allFavoritesPreview
+        }
+
+        confirmVerified(localDataSourceRepository)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun allPreviewByPersonTest() = runTest {
+
+        val repositoryImpl = RepositoryImpl(
+            localDataSourceRepository = localDataSourceRepository,
+            remoteDataSourceRepository = remoteDataSourceRepository,
+            mapper = mapper
+        )
+
+        repositoryImpl.allPreviewByPerson
+
+        coVerify(exactly = 1) {
             localDataSourceRepository.allPreviewByPerson
+        }
+
+        confirmVerified(localDataSourceRepository)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun getPersonTest() = runTest {
+
+        val repositoryImpl = RepositoryImpl(
+            localDataSourceRepository = localDataSourceRepository,
+            remoteDataSourceRepository = remoteDataSourceRepository,
+            mapper = mapper
+        )
+
+        repositoryImpl.getPerson
+
+        coVerify(exactly = 1) {
             localDataSourceRepository.allPerson
+        }
+
+        confirmVerified(localDataSourceRepository)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun getReviewTest() = runTest {
+
+        val repositoryImpl = RepositoryImpl(
+            localDataSourceRepository = localDataSourceRepository,
+            remoteDataSourceRepository = remoteDataSourceRepository,
+            mapper = mapper
+        )
+
+        repositoryImpl.getReview
+
+        coVerify(exactly = 1) {
             localDataSourceRepository.allReview
         }
 

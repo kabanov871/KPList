@@ -13,13 +13,13 @@ import org.junit.jupiter.api.Test
 
 class LocalDataSourceRepositoryImplTest {
 
-    val previewDao = mockk<PreviewDao>(relaxed = true)
-    val favoritesPreviewDao = mockk<FavoritesPreviewDao>(relaxed = true)
-    val previewByPersonDao = mockk<PreviewByPersonDao>(relaxed = true)
-    val reviewDao = mockk<ReviewDao>(relaxed = true)
-    val movieDao = mockk<MovieDao>(relaxed = true)
-    val personDao = mockk<PersonDao>(relaxed = true)
-    val detailDao = mockk<DetailDao>(relaxed = true)
+    private val previewDao = mockk<PreviewDao>(relaxed = true)
+    private val favoritesPreviewDao = mockk<FavoritesPreviewDao>(relaxed = true)
+    private val previewByPersonDao = mockk<PreviewByPersonDao>(relaxed = true)
+    private val reviewDao = mockk<ReviewDao>(relaxed = true)
+    private val movieDao = mockk<MovieDao>(relaxed = true)
+    private val personDao = mockk<PersonDao>(relaxed = true)
+    private val detailDao = mockk<DetailDao>(relaxed = true)
 
     @AfterEach
     fun afterEach() {

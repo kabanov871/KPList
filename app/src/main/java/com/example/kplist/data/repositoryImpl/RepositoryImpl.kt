@@ -36,22 +36,27 @@ class RepositoryImpl @Inject constructor (
 
       }
 
-    override val allPreview = Transformations.map(localDataSourceRepository.allPreview) {
+    override val allPreview: LiveData<List<PreviewUseCaseModel>>
+        get() = Transformations.map(localDataSourceRepository.allPreview) {
             mapper.mapListPreviewDbModelToListPreviewUseCaseModel(it)
-      }
-    override val allFavoritesPreview = Transformations.map(localDataSourceRepository.allFavoritesPreview) {
+        }
+    override val allFavoritesPreview: LiveData<List<FavoritesPreviewUseCaseModel>>
+        get() = Transformations.map(localDataSourceRepository.allFavoritesPreview) {
         mapper.mapListFavoritesPreviewDbModelToListFavoritesPreviewUseCaseModel(it)
     }
 
-    override val allPreviewByPerson = Transformations.map(localDataSourceRepository.allPreviewByPerson) {
+    override val allPreviewByPerson: LiveData<List<PreviewByPersonUseCaseModel>>
+        get() = Transformations.map(localDataSourceRepository.allPreviewByPerson) {
         mapper.mapListPreviewByPersonDbModelToListPreviewByPersonUseCaseModel(it)
     }
 
-    override val getPerson = Transformations.map(localDataSourceRepository.allPerson) {
+    override val getPerson: LiveData<List<PersonUseCaseModel>>
+        get() = Transformations.map(localDataSourceRepository.allPerson) {
         mapper.mapListPersonDbModelToListPersonUseCaseModel(it)
     }
 
-    override val getReview = Transformations.map(localDataSourceRepository.allReview) {
+    override val getReview: LiveData<List<ReviewUseCaseModel>>
+        get() = Transformations.map(localDataSourceRepository.allReview) {
         mapper.mapListReviewDbModelToListReviewUseCaseModel(it)
     }
 
