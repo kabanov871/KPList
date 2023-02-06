@@ -16,7 +16,8 @@ class FavoritesViewModel @Inject constructor(
     private val insertFavoritesPreviewUseCase: InsertFavoritesPreviewUseCase,
 ): ViewModel() {
 
-    val getAllFavoritesPreview: LiveData<List<FavoritesPreviewUseCaseModel>> = getAllFavoritesPreviewUseCase.getAllFavoritesPreview
+    val getAllFavoritesPreview: LiveData<List<FavoritesPreviewUseCaseModel>>
+        get() = getAllFavoritesPreviewUseCase.getAllFavoritesPreview
 
     fun checkFavoritesPreview(movieId: Int): Boolean {
 

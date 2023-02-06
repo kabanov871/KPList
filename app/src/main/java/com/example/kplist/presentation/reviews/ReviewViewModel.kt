@@ -10,6 +10,7 @@ class ReviewViewModel @Inject constructor(
     private val getReviewUseCase: GetReviewUseCase
 ): ViewModel() {
 
-    val getReview: LiveData<List<ReviewUseCaseModel>> = getReviewUseCase.getReview
+    val getReview: LiveData<List<ReviewUseCaseModel>>
+        get() = getReviewUseCase.getReview
 }
 

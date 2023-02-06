@@ -14,7 +14,8 @@ class PersonViewModel @Inject constructor(
     private val getPersonUseCase: GetPersonUseCase
 ): ViewModel() {
 
-    val getPerson: LiveData<List<PersonUseCaseModel>> = getPersonUseCase.getPerson
+    val getPerson: LiveData<List<PersonUseCaseModel>>
+        get() = getPersonUseCase.getPerson
 
 
 }

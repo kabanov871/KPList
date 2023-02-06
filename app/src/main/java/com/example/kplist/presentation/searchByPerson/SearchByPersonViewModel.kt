@@ -17,5 +17,6 @@ class SearchByPersonViewModel @Inject constructor (
         searchPreviewByPersonUseCase.searchPreviewByPerson(personId)
     }
 
-    val getAllPreviewByPerson: LiveData<List<PreviewByPersonUseCaseModel>> = getAllPreviewByPersonUseCase.getAllPreviewByPerson
+    val getAllPreviewByPerson: LiveData<List<PreviewByPersonUseCaseModel>>
+        get() = getAllPreviewByPersonUseCase.getAllPreviewByPerson
 }

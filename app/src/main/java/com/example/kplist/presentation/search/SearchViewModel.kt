@@ -32,7 +32,8 @@ class SearchViewModel @Inject constructor(
         )
     }
 
-    val getAllPreview: LiveData<List<PreviewUseCaseModel>> = getAllPreviewUseCase.getAllPreview
+    val getAllPreview: LiveData<List<PreviewUseCaseModel>>
+        get() = getAllPreviewUseCase.getAllPreview
 
 
 
