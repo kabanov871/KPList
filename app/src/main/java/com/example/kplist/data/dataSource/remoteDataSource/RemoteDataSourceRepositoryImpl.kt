@@ -87,9 +87,7 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMovie(id: String, token: String) {
-
         api.getMovie(Constance.FIELD_BY_ID, id, token).let {
-
             if (it.isSuccessful) {
                 if (it.body() != null) {
                     apiMovieModelBody = it.body() as ApiMovieModel
@@ -104,9 +102,7 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getReview(field: String, movieId: String, limit: String, token: String) {
-
         api.searchReview(field, movieId, limit, token).let {
-
             if (it.isSuccessful) {
                 if (it.body() != null) {
                     apiReviewModelBody = it.body() as ApiReviewModel
@@ -117,9 +113,7 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insertFavoritesPreview(movieId: Int) {
-
         api.getMovie(Constance.FIELD_BY_ID, movieId.toString(), Constance.TOKEN).let {
-
             if (it.isSuccessful) {
                 if (it.body() != null) {
                     apiMovieModelBody = it.body() as ApiMovieModel
@@ -139,7 +133,6 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
         token: String
     ) {
         api.searchReviewByPerson(field, personId, token).let {
-
             if (it.isSuccessful) {
                 if (it.body() != null) {
                     apiPersonModelBody = it.body() as ApiPersonModel
@@ -152,14 +145,10 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
     }
 
     suspend fun insertPreviewList(model: ApiPreviewModel) {
-
         val list = ArrayList<Doc>()
-
         list.clear()
         model.let { it1 -> list.addAll(it1.docs) }
-
         for (audit in list) {
-
             audit.id.let { it1 ->
                 audit.name?.let { it2 ->
                     PreviewDbModel(
@@ -175,18 +164,14 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
                     }
                 }
             }
-
         }
     }
 
     suspend fun insertMovieModel(model: ApiMovieModel) {
-
         val personList = ArrayList<Person>()
         val countryList = ArrayList<Country>()
         val factList = ArrayList<Fact>()
         val trailerList = ArrayList<Trailer>()
-
-
         localDataSourceRepository.insertMovie(
             MovieDbModel(
                 1,
@@ -200,10 +185,8 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
                 model.rating?.filmCritics
             )
         )
-
         personList.clear()
         model.persons?.let { it1 -> personList.addAll(it1) }
-
         for (audit in personList) {
             PersonDbModel(
                 0,
@@ -211,13 +194,10 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
                 audit.photo,
                 audit.name,
                 audit.enProfession
-
             ).let { localDataSourceRepository.insertPerson(it) }
         }
-
         countryList.clear()
         model.countries?.let { it1 -> countryList.addAll(it1) }
-
         for (audit in countryList) {
             DetailDbModel(
                 0,
@@ -225,10 +205,8 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
                 audit.name
             ).let { localDataSourceRepository.insertDetail(it) }
         }
-
         factList.clear()
         model.facts?.let { it1 -> factList.addAll(it1) }
-
         for (audit in factList) {
             DetailDbModel(
                 0,
@@ -236,10 +214,8 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
                 audit.value
             ).let { localDataSourceRepository.insertDetail(it) }
         }
-
         trailerList.clear()
         model.videos?.trailers?.let { it1 -> trailerList.addAll(it1) }
-
         for (audit in trailerList) {
             DetailDbModel(
                 0,
@@ -250,12 +226,9 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
     }
 
     suspend fun insertReviewModel(model: ApiReviewModel) {
-
         val reviewList = ArrayList<com.example.kplist.data.models.apiReviewModel.Doc>()
-
         reviewList.clear()
         model.docs?.let { it1 -> reviewList.addAll(it1) }
-
         for (audit in reviewList) {
             ReviewDbModel(
                 0,
@@ -270,12 +243,9 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
     }
 
     suspend fun insertFavorites(model: ApiMovieModel) {
-
         withContext(Dispatchers.Main) {
-
             toast.showToast(application.resources.getString(R.string.insert_done))
         }
-
         localDataSourceRepository.insertFavoritesPreview(
             FavoritesPreviewDbModel(
                 0,
@@ -290,18 +260,12 @@ class RemoteDataSourceRepositoryImpl @Inject constructor(
     }
 
     suspend fun insertPreviewByPerson(model: ApiPersonModel) {
-
         val movieInPersonList = ArrayList<Movy>()
-
         movieInPersonList.clear()
         model.movies?.let { it1 -> movieInPersonList.addAll(it1) }
-
         for (audit in movieInPersonList) {
-
             audit.id.let {
-
                 audit.name?.let { it2 ->
-
                     PreviewByPersonDbModel(
                         0,
                         audit.id,

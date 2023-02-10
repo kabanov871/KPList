@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class ReviewViewModel @Inject constructor(
     private val getReviewUseCase: GetReviewUseCase
-): ViewModel() {
+) : ViewModel() {
 
     val getReview: LiveData<List<ReviewUseCaseModel>>
         get() = getReviewUseCase.getReview

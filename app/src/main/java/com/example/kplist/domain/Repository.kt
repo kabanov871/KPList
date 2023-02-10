@@ -53,5 +53,4 @@ interface Repository {
     fun checkFavoritesPreview(movieId: Int): Boolean
 
     fun deleteFavoritesPreview(movieId: Int)
-
 }

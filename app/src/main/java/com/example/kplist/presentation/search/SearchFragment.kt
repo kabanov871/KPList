@@ -23,14 +23,13 @@ import javax.inject.Inject
 
 class SearchFragment : Fragment() {
 
-    lateinit var binding: FragmentSearchBinding
-    lateinit var adapter: SearchAdapter
+    private lateinit var binding: FragmentSearchBinding
+    private lateinit var adapter: SearchAdapter
     private lateinit var viewModel: SearchViewModel
     private lateinit var favoritesViewModel: FavoritesViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     private val component by lazy {
         (requireActivity().application as MyApp).component
     }
@@ -45,65 +44,57 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
-
         viewModel = ViewModelProvider(this, viewModelFactory)[SearchViewModel::class.java]
-
         favoritesViewModel = ViewModelProvider(
-            this, viewModelFactory)[FavoritesViewModel::class.java]
-
+            this, viewModelFactory
+        )[FavoritesViewModel::class.java]
         binding.bmenu.selectedItemId = R.id.item1
         binding.bmenu.setOnItemSelectedListener {
-            when (it.itemId){
-
-                R.id.item2 ->{findNavController().navigate(R.id.action_searchFragment_to_favouritesFragment)}
-
+            when (it.itemId) {
+                R.id.item2 -> {
+                    findNavController()
+                        .navigate(R.id.action_searchFragment_to_favouritesFragment)
+                }
             }
             return@setOnItemSelectedListener true
         }
-
         binding.rw.layoutManager = GridLayoutManager(context, 2)
-        adapter = SearchAdapter {movieId: String -> searchMovie(movieId)}
-
-
+        adapter = SearchAdapter { movieId: String -> searchMovie(movieId) }
         binding.rw.adapter = adapter
-
         binding.button.setOnClickListener {
             searchByNamePreview(binding.editText.text.toString())
         }
-
         binding.button2.setOnClickListener {
-            val fragment = BottomSheetFragment { nameField: String,
-                                                      search: String,
-                                                      nameField2: String,
-                                                      search2: String,
-                                                      sortField: String,
-                                                      sortType: String ->
-                advancedSearch(
+            val fragment = BottomSheetFragment {
+                    nameField: String,
+                    search: String,
+                    nameField2: String,
+                    search2: String,
+                    sortField: String,
+                    sortType: String -> advancedSearch(
                     nameField, search, nameField2, search2, sortField, sortType
                 )
             }
-            fragment.show((context as FragmentActivity).supportFragmentManager, "advancedSearch")
+            fragment.show(
+                (context as FragmentActivity)
+                    .supportFragmentManager, "advancedSearch"
+            )
         }
-
         displayStartPreview()
-
         return binding.root
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun displayStartPreview(){
-
-        viewModel.getAllPreview.observe(viewLifecycleOwner
-
+    private fun displayStartPreview() {
+        viewModel.getAllPreview.observe(
+            viewLifecycleOwner
         ) {
             adapter.setList(it)
             adapter.notifyDataSetChanged()
         }
-
     }
 
     private fun searchByNamePreview(name: String) {
-
         viewModel.searchByNamePreview(
             Constance.SORT_BY_NAME,
             name,
@@ -122,20 +113,22 @@ class SearchFragment : Fragment() {
         search2: String,
         sortField: String,
         sortType: String
-    ){
+    ) {
         viewModel.advancedSearchPreview(
-            nameField, search, nameField2, search2, sortField, sortType, Constance.LIMIT, Constance.TOKEN
+            nameField,
+            search,
+            nameField2,
+            search2,
+            sortField,
+            sortType,
+            Constance.LIMIT,
+            Constance.TOKEN
         )
     }
+
     private fun searchMovie(movieId: String) {
         viewModel.searchMovie(movieId, Constance.TOKEN)
         viewModel.searchReview(movieId)
         findNavController().navigate(R.id.action_searchFragment_to_movieFragment)
     }
-
-    private fun checkFavorites(movieId: Int): Boolean {
-
-        return favoritesViewModel.checkFavoritesPreview(movieId)
-    }
-
 }

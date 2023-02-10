@@ -12,10 +12,8 @@ import javax.inject.Inject
 
 class PersonViewModel @Inject constructor(
     private val getPersonUseCase: GetPersonUseCase
-): ViewModel() {
+) : ViewModel() {
 
     val getPerson: LiveData<List<PersonUseCaseModel>>
         get() = getPersonUseCase.getPerson
-
-
 }

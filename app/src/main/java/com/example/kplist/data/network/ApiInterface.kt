@@ -57,8 +57,3 @@ interface ApiInterface {
 }
 
 
-//limit=1000&token=ZQQ8GMN-TN54SGK-NB3MKEC-ZKB8V06
-//field=rating.kp&search=6-10&limit=1000&
-//
-//@Path("genres") genres: String, @Path("sort") sort: String
-//movie?field=rating.kp&search=7-10&field=year&limit=100&search=2017-2020&field=typeNumber&search=2&sortField=year&sortType=1&sortField=votes.imdb&sortType=-1&token=ZQQ8GMN-TN54SGK-NB3MKEC-ZKB8V06

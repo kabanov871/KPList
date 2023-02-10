@@ -22,14 +22,12 @@ import javax.inject.Inject
 
 class TrailerFragment : Fragment() {
 
-    lateinit var binding: FragmentTrailerBinding
+    private lateinit var binding: FragmentTrailerBinding
     private lateinit var adapter: TrailerAdapter
     private lateinit var viewModel: FactViewModel
-    lateinit var link: String
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     private val component by lazy {
         (requireActivity().application as MyApp).component
     }
@@ -44,34 +42,26 @@ class TrailerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentTrailerBinding.inflate(inflater, container, false)
-
         viewModel = ViewModelProvider(this, viewModelFactory)[FactViewModel::class.java]
-
         binding.rv.layoutManager = LinearLayoutManager(context)
         adapter = TrailerAdapter { url: String -> openUrl(url) }
         binding.rv.adapter = adapter
-
         displayStartTrailer()
-
         return binding.root
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun displayStartTrailer(){
-
-        viewModel.getDetail(R.string.detail_trailer.toString()).observe(viewLifecycleOwner
-
+    private fun displayStartTrailer() {
+        viewModel.getDetail(R.string.detail_trailer.toString()).observe(
+            viewLifecycleOwner
         ) {
             adapter.setList(it)
             adapter.notifyDataSetChanged()
         }
-
     }
 
-    private fun openUrl(url: String){
-        link = url
+    private fun openUrl(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
-
 }

@@ -22,13 +22,12 @@ import javax.inject.Inject
 
 class MovieFragment : Fragment() {
 
-    lateinit var binding: FragmentMovieBinding
+    private lateinit var binding: FragmentMovieBinding
     private lateinit var viewModel: MovieViewModel
     private lateinit var favoritesViewModel: FavoritesViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     private val component by lazy {
         (requireActivity().application as MyApp).component
     }
@@ -44,83 +43,64 @@ class MovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMovieBinding.inflate(inflater, container, false)
-
         viewModel = ViewModelProvider(this, viewModelFactory)[MovieViewModel::class.java]
-
         favoritesViewModel = ViewModelProvider(
-            this, viewModelFactory)[FavoritesViewModel::class.java]
-
-         viewModel.getMovie().observe(viewLifecycleOwner) {
-
+            this, viewModelFactory
+        )[FavoritesViewModel::class.java]
+        viewModel.getMovie().observe(viewLifecycleOwner) {
             val response = it
-
-                if (response != null) {
-                    val check = response.movieId
-                    binding.textViewRatingKp.text = response.ratingKp.toString()
-                    binding.textViewRatingImdb.text = response.ratingImdb.toString()
-                    binding.textViewRatingCritics.text = response.ratingCritic.toString()
-                    binding.textMovieName.text = response.name
-                    val getImage = response.poster
-                    Picasso.get().load(getImage).into(binding.imageViewPoster)
-                    binding.textYear.text = response.year
-                    binding.textDesc.text = response.description
-
-                    CoroutineScope(Dispatchers.IO).launch {
-
-                        val exists = favoritesViewModel.checkFavoritesPreview(check)
-
-                        if (!exists) {
-
-                            binding.buttonCheck.text = resources.getString(R.string.insert)
-
-                            binding.buttonCheck.setOnClickListener {
-
-                                favoritesViewModel.insertFavoritesPreview(check)
-                                binding.buttonCheck.visibility = View.INVISIBLE
-                            }
-
-                        }
-                        if (exists) {
-
-                            binding.buttonCheck.text = resources.getString(R.string.delete)
-
-                            binding.buttonCheck.setOnClickListener {
-
-                                favoritesViewModel.deleteFavoritesPreview(check)
-                                Toast.makeText(
-                                    context, R.string.delete_toast, Toast.LENGTH_SHORT).show()
-                                binding.buttonCheck.visibility = View.INVISIBLE
-                            }
-
+            if (response != null) {
+                val check = response.movieId
+                binding.textViewRatingKp.text = response.ratingKp.toString()
+                binding.textViewRatingImdb.text = response.ratingImdb.toString()
+                binding.textViewRatingCritics.text = response.ratingCritic.toString()
+                binding.textMovieName.text = response.name
+                val getImage = response.poster
+                Picasso.get().load(getImage).into(binding.imageViewPoster)
+                binding.textYear.text = response.year
+                binding.textDesc.text = response.description
+                CoroutineScope(Dispatchers.IO).launch {
+                    val exists = favoritesViewModel.checkFavoritesPreview(check)
+                    if (!exists) {
+                        binding.buttonCheck.text = resources.getString(R.string.insert)
+                        binding.buttonCheck.setOnClickListener {
+                            favoritesViewModel.insertFavoritesPreview(check)
+                            binding.buttonCheck.visibility = View.INVISIBLE
                         }
                     }
-
-                }
-         }
-
-
-            viewModel.getDetail(R.string.detail_country.toString()).observe(viewLifecycleOwner) {
-
-                if (it.size == 1) {
-                    binding.country1.text = it[0].value
-                }
-                if (it.size == 2) {
-                    binding.country1.text = it[0].value
-                    binding.country2.text = it[1].value
-                }
-                if (it.size == 3) {
-                    binding.country1.text = it[0].value
-                    binding.country2.text = it[1].value
-                    binding.country3.text = it[2].value
-                }
-                if (it.size > 3) {
-                    binding.country1.text = it[0].value
-                    binding.country2.text = it[1].value
-                    binding.country3.text = it[2].value
-                    binding.country4.text = it[3].value
+                    if (exists) {
+                        binding.buttonCheck.text = resources.getString(R.string.delete)
+                        binding.buttonCheck.setOnClickListener {
+                            favoritesViewModel.deleteFavoritesPreview(check)
+                            Toast.makeText(
+                                context, R.string.delete_toast, Toast.LENGTH_SHORT
+                            ).show()
+                            binding.buttonCheck.visibility = View.INVISIBLE
+                        }
+                    }
                 }
             }
-
+        }
+        viewModel.getDetail(R.string.detail_country.toString()).observe(viewLifecycleOwner) {
+            if (it.size == 1) {
+                binding.country1.text = it[0].value
+            }
+            if (it.size == 2) {
+                binding.country1.text = it[0].value
+                binding.country2.text = it[1].value
+            }
+            if (it.size == 3) {
+                binding.country1.text = it[0].value
+                binding.country2.text = it[1].value
+                binding.country3.text = it[2].value
+            }
+            if (it.size > 3) {
+                binding.country1.text = it[0].value
+                binding.country2.text = it[1].value
+                binding.country3.text = it[2].value
+                binding.country4.text = it[3].value
+            }
+        }
         binding.buttonPerson.setOnClickListener {
             findNavController().navigate(R.id.action_movieFragment_to_personFragment)
         }
@@ -133,8 +113,6 @@ class MovieFragment : Fragment() {
         binding.buttonReview.setOnClickListener {
             findNavController().navigate(R.id.action_movieFragment_to_reviewFragment)
         }
-
-
         return binding.root
     }
 }

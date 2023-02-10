@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName ="preview_by_person_table")
-data class PreviewByPersonDbModel (
+@Entity(tableName = "preview_by_person_table")
+data class PreviewByPersonDbModel(
 
         @PrimaryKey(autoGenerate = true)
         val id: Int,
@@ -16,4 +16,4 @@ data class PreviewByPersonDbModel (
         val name: String? = null,
 
         val description: String? = null
-        )
+)

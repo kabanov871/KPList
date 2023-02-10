@@ -24,14 +24,13 @@ import javax.inject.Inject
 
 class SearchByPersonFragment : Fragment() {
 
-    lateinit var binding: FragmentSearchByPersonBinding
+    private lateinit var binding: FragmentSearchByPersonBinding
     private lateinit var adapter: SearchByPersonAdapter
     private lateinit var viewModel: SearchByPersonViewModel
     private lateinit var viewModelSearch: SearchViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     private val component by lazy {
         (requireActivity().application as MyApp).component
     }
@@ -46,30 +45,27 @@ class SearchByPersonFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSearchByPersonBinding.inflate(inflater, container, false)
-
-        viewModel = ViewModelProvider(this, viewModelFactory)[SearchByPersonViewModel::class.java]
-
-        viewModelSearch = ViewModelProvider(this, viewModelFactory)[SearchViewModel::class.java]
-
+        viewModel = ViewModelProvider(
+            this, viewModelFactory
+        )[SearchByPersonViewModel::class.java]
+        viewModelSearch = ViewModelProvider(
+            this, viewModelFactory
+        )[SearchViewModel::class.java]
         binding.rv.layoutManager = GridLayoutManager(context, 2)
-        adapter = SearchByPersonAdapter{ movieId: String -> searchMovie(movieId) }
+        adapter = SearchByPersonAdapter { movieId: String -> searchMovie(movieId) }
         binding.rv.adapter = adapter
-
         displayStartSearchByPerson()
-
         return binding.root
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun displayStartSearchByPerson(){
-
-        viewModel.getAllPreviewByPerson.observe(viewLifecycleOwner
-
+    private fun displayStartSearchByPerson() {
+        viewModel.getAllPreviewByPerson.observe(
+            viewLifecycleOwner
         ) {
             adapter.setList(it)
             adapter.notifyDataSetChanged()
         }
-
     }
 
     private fun searchMovie(movieId: String) {

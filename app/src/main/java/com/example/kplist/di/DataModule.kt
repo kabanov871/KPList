@@ -26,7 +26,9 @@ interface DataModule {
 
     @Binds
     @ApplicationScope
-    fun bindRemoteDataSourceRepository(impl: RemoteDataSourceRepositoryImpl): RemoteDataSourceRepository
+    fun bindRemoteDataSourceRepository(
+        impl: RemoteDataSourceRepositoryImpl
+    ): RemoteDataSourceRepository
 
     @Binds
     @ApplicationScope
@@ -34,7 +36,9 @@ interface DataModule {
 
     @Binds
     @ApplicationScope
-    fun bindLocalDataSourceRepository(impl: LocalDataSourceRepositoryImpl): LocalDataSourceRepository
+    fun bindLocalDataSourceRepository(
+        impl: LocalDataSourceRepositoryImpl
+    ): LocalDataSourceRepository
 
     companion object {
 

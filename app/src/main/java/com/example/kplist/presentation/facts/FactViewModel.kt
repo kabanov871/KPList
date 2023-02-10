@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class FactViewModel @Inject constructor(
     private val getDetailUseCase: GetDetailUseCase
-): ViewModel() {
+) : ViewModel() {
 
     fun getDetail(name: String): LiveData<List<DetailUseCaseModel>> {
         return getDetailUseCase.getDetail(name)

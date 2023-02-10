@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName ="movie_table")
-data class MovieDbModel (
+@Entity(tableName = "movie_table")
+data class MovieDbModel(
 
     @PrimaryKey
     val id: Int,
@@ -30,4 +30,4 @@ data class MovieDbModel (
     @ColumnInfo(name = "rating_critic")
     val ratingCritic: Double? = null
 
-    )
+)

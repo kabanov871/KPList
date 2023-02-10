@@ -16,7 +16,7 @@ class SearchViewModel @Inject constructor(
     private val searchByNamePreviewUseCase: SearchByNamePreviewUseCase,
     private val searchMovieUseCase: SearchMovieUseCase,
     private val searchReviewUseCase: SearchReviewUseCase
-): ViewModel() {
+) : ViewModel() {
 
     fun advancedSearchPreview(
         nameField: String,
@@ -27,15 +27,14 @@ class SearchViewModel @Inject constructor(
         sortType: String,
         limit: String,
         token: String
-    ) { advancedSearchPreviewUseCase.advancedSearchPreview(
+    ) {
+        advancedSearchPreviewUseCase.advancedSearchPreview(
             nameField, search, nameField2, search2, sortField, sortType, limit, token
         )
     }
 
     val getAllPreview: LiveData<List<PreviewUseCaseModel>>
         get() = getAllPreviewUseCase.getAllPreview
-
-
 
     fun searchByNamePreview(
         nameField: String,
@@ -45,8 +44,10 @@ class SearchViewModel @Inject constructor(
         sortType: String,
         limit: String,
         token: String
-    ) { searchByNamePreviewUseCase.searchByNamePreview(
-            nameField, search, isStrict, sortField, sortType, limit, token)
+    ) {
+        searchByNamePreviewUseCase.searchByNamePreview(
+            nameField, search, isStrict, sortField, sortType, limit, token
+        )
     }
 
     fun searchMovie(movieId: String, token: String) {

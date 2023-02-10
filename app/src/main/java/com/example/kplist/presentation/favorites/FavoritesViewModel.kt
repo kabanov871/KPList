@@ -14,23 +14,20 @@ class FavoritesViewModel @Inject constructor(
     private val deleteFavoritesPreviewUseCase: DeleteFavoritesPreviewUseCase,
     private val getAllFavoritesPreviewUseCase: GetAllFavoritesPreviewUseCase,
     private val insertFavoritesPreviewUseCase: InsertFavoritesPreviewUseCase,
-): ViewModel() {
+) : ViewModel() {
 
     val getAllFavoritesPreview: LiveData<List<FavoritesPreviewUseCaseModel>>
         get() = getAllFavoritesPreviewUseCase.getAllFavoritesPreview
 
     fun checkFavoritesPreview(movieId: Int): Boolean {
-
         return checkFavoritesPreviewUseCase.checkFavoritesPreview(movieId)
     }
 
     fun deleteFavoritesPreview(movieId: Int) {
-
         deleteFavoritesPreviewUseCase.deleteFavoritesPreview(movieId)
     }
 
     fun insertFavoritesPreview(movieId: Int) {
-
         insertFavoritesPreviewUseCase.insertFavoritesPreview(movieId)
     }
 }

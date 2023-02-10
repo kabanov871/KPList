@@ -8,7 +8,6 @@ import javax.inject.Inject
 class CheckFavoritesPreviewUseCase @Inject constructor (private val repository: Repository) {
 
     fun checkFavoritesPreview(movieId: Int): Boolean {
-
         return repository.checkFavoritesPreview(movieId)
     }
 }

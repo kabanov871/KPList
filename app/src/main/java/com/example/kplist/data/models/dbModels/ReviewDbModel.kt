@@ -3,7 +3,7 @@ package com.example.kplist.data.models.dbModels
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName ="review_table")
+@Entity(tableName = "review_table")
 data class ReviewDbModel(
 
     @PrimaryKey(autoGenerate = true)

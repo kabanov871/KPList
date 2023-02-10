@@ -11,7 +11,6 @@ interface LocalDataSourceRepository {
 
     suspend fun clearPreview()
 
-
     suspend fun insertFavoritesPreview(favoritesPreviewModel: FavoritesPreviewDbModel)
 
     val allFavoritesPreview: LiveData<List<FavoritesPreviewDbModel>>
@@ -20,13 +19,11 @@ interface LocalDataSourceRepository {
 
     suspend fun deleteFavoritesPreview(movieId: Int)
 
-
     suspend fun insertPreviewByPerson(previewByPersonModel: PreviewByPersonDbModel)
 
     val allPreviewByPerson: LiveData<List<PreviewByPersonDbModel>>
 
     suspend fun clearPreviewByPerson()
-
 
     suspend fun insertMovie(movieModel: MovieDbModel)
 
@@ -34,20 +31,17 @@ interface LocalDataSourceRepository {
 
     suspend fun clearMovie()
 
-
     suspend fun insertPerson(personModel: PersonDbModel)
 
     val allPerson: LiveData<List<PersonDbModel>>
 
     suspend fun clearPerson()
 
-
     suspend fun insertDetail(detailModel: DetailDbModel)
 
     fun getAllDetail(name: String): LiveData<List<DetailDbModel>>
 
     suspend fun clearDetail()
-
 
     suspend fun insertReview(reviewModel: ReviewDbModel)
 

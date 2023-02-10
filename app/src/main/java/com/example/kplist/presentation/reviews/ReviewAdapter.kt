@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kplist.databinding.ReviewItemBinding
 import com.example.kplist.domain.modelsUseCase.ReviewUseCaseModel
 
-class ReviewAdapter: RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
+class ReviewAdapter : RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
 
     private var reviewList = ArrayList<ReviewUseCaseModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewHolder {
-
-        val binding : ReviewItemBinding = ReviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding: ReviewItemBinding = ReviewItemBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
         return ReviewHolder(binding)
     }
 
@@ -24,16 +25,13 @@ class ReviewAdapter: RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
         holder.bind(reviewList[position])
     }
 
-    fun setList (list: List<ReviewUseCaseModel>){
+    fun setList(list: List<ReviewUseCaseModel>) {
         reviewList.clear()
         reviewList.addAll(list)
     }
 
-    class ReviewHolder(val binding: ReviewItemBinding): RecyclerView.ViewHolder(binding.root){
-
-
+    class ReviewHolder(val binding: ReviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(review: ReviewUseCaseModel) {
-
             binding.apply {
                 textAuthor.text = review.author
                 textViewType.text = review.type
@@ -41,11 +39,7 @@ class ReviewAdapter: RecyclerView.Adapter<ReviewAdapter.ReviewHolder>() {
                 textReview.text = review.review
                 textLike.text = review.likes.toString()
                 textDislike.text = review.dislikes.toString()
-
             }
-
-
         }
     }
-
 }

@@ -13,7 +13,7 @@ class MovieViewModel @Inject constructor(
     private val getMovieUseCase: GetMovieUseCase,
     private val getDetailUseCase: GetDetailUseCase,
     private val searchMovieUseCase: SearchMovieUseCase
-): ViewModel() {
+) : ViewModel() {
 
     fun getMovie(): LiveData<MovieUseCaseModel?> {
         return getMovieUseCase.getMovie()
@@ -22,6 +22,7 @@ class MovieViewModel @Inject constructor(
     fun getDetail(name: String): LiveData<List<DetailUseCaseModel>> {
         return getDetailUseCase.getDetail(name)
     }
+
     fun searchMovie(movieId: String, token: String) {
         searchMovieUseCase.searchMovie(movieId, token)
     }

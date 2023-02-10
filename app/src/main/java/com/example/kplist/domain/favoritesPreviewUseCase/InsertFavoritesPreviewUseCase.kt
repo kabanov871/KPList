@@ -7,7 +7,6 @@ import javax.inject.Inject
 class InsertFavoritesPreviewUseCase @Inject constructor (private val repository: Repository) {
 
     fun insertFavoritesPreview(movieId: Int) {
-
         repository.insertFavoritesPreview(movieId)
     }
 }

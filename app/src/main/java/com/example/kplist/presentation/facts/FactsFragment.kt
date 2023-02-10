@@ -21,13 +21,12 @@ import javax.inject.Inject
 
 class FactsFragment : Fragment() {
 
-    lateinit var binding: FragmentFactsBinding
+    private lateinit var binding: FragmentFactsBinding
     private lateinit var adapter: FactAdapter
     private lateinit var viewModel: FactViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     private val component by lazy {
         (requireActivity().application as MyApp).component
     }
@@ -42,28 +41,21 @@ class FactsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFactsBinding.inflate(inflater, container, false)
-
         viewModel = ViewModelProvider(this, viewModelFactory)[FactViewModel::class.java]
-
         binding.rv.layoutManager = LinearLayoutManager(context)
-        adapter = FactAdapter ()
+        adapter = FactAdapter()
         binding.rv.adapter = adapter
-
         displayStartFacts()
-
         return binding.root
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun displayStartFacts(){
-
-        viewModel.getDetail(R.string.detail_fact.toString()).observe(viewLifecycleOwner
-
+    private fun displayStartFacts() {
+        viewModel.getDetail(R.string.detail_fact.toString()).observe(
+            viewLifecycleOwner
         ) {
             adapter.setList(it)
             adapter.notifyDataSetChanged()
         }
-
     }
-
 }

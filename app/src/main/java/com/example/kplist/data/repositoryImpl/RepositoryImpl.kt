@@ -11,13 +11,13 @@ import com.example.kplist.presentation.Constance
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
-class RepositoryImpl @Inject constructor (
+class RepositoryImpl @Inject constructor(
     private val localDataSourceRepository: LocalDataSourceRepository,
     private val remoteDataSourceRepository: RemoteDataSourceRepository,
     private val mapper: Mapper
-        ): Repository{
+) : Repository {
 
-      override fun advancedSearchPreview(
+    override fun advancedSearchPreview(
         nameField: String,
         search: String,
         nameField2: String,
@@ -25,41 +25,40 @@ class RepositoryImpl @Inject constructor (
         sortField: String,
         sortType: String,
         limit: String,
-        token: String) {
-        CoroutineScope(Dispatchers.IO).launch{
-
-          localDataSourceRepository.clearPreview()
-          remoteDataSourceRepository.advancedSearchPreviewStartMigration(
-            nameField, search, nameField2, search2, sortField, sortType, limit, token
-          )
+        token: String
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            localDataSourceRepository.clearPreview()
+            remoteDataSourceRepository.advancedSearchPreviewStartMigration(
+                nameField, search, nameField2, search2, sortField, sortType, limit, token
+            )
         }
-
-      }
+    }
 
     override val allPreview: LiveData<List<PreviewUseCaseModel>>
         get() = Transformations.map(localDataSourceRepository.allPreview) {
             mapper.mapListPreviewDbModelToListPreviewUseCaseModel(it)
         }
+
     override val allFavoritesPreview: LiveData<List<FavoritesPreviewUseCaseModel>>
         get() = Transformations.map(localDataSourceRepository.allFavoritesPreview) {
-        mapper.mapListFavoritesPreviewDbModelToListFavoritesPreviewUseCaseModel(it)
-    }
+            mapper.mapListFavoritesPreviewDbModelToListFavoritesPreviewUseCaseModel(it)
+        }
 
     override val allPreviewByPerson: LiveData<List<PreviewByPersonUseCaseModel>>
         get() = Transformations.map(localDataSourceRepository.allPreviewByPerson) {
-        mapper.mapListPreviewByPersonDbModelToListPreviewByPersonUseCaseModel(it)
-    }
+            mapper.mapListPreviewByPersonDbModelToListPreviewByPersonUseCaseModel(it)
+        }
 
     override val getPerson: LiveData<List<PersonUseCaseModel>>
         get() = Transformations.map(localDataSourceRepository.allPerson) {
-        mapper.mapListPersonDbModelToListPersonUseCaseModel(it)
-    }
+            mapper.mapListPersonDbModelToListPersonUseCaseModel(it)
+        }
 
     override val getReview: LiveData<List<ReviewUseCaseModel>>
         get() = Transformations.map(localDataSourceRepository.allReview) {
-        mapper.mapListReviewDbModelToListReviewUseCaseModel(it)
-    }
-
+            mapper.mapListReviewDbModelToListReviewUseCaseModel(it)
+        }
 
     override fun searchByNamePreview(
         nameField: String,
@@ -69,43 +68,43 @@ class RepositoryImpl @Inject constructor (
         sortType: String,
         limit: String,
         token: String
-        ) {
-
-          CoroutineScope(Dispatchers.IO).launch{
-
-              localDataSourceRepository.clearPreview()
-              remoteDataSourceRepository.searchByNamePreviewStartMigration(
-                  nameField, search, isStrict, sortField, sortType, limit, token
-              )
-          }
-      }
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+            localDataSourceRepository.clearPreview()
+            remoteDataSourceRepository.searchByNamePreviewStartMigration(
+                nameField, search, isStrict, sortField, sortType, limit, token
+            )
+        }
+    }
 
     override fun searchMovie(movieId: String, token: String) {
         CoroutineScope(Dispatchers.IO).launch {
-
             localDataSourceRepository.clearMovie()
             localDataSourceRepository.clearDetail()
             localDataSourceRepository.clearPerson()
             remoteDataSourceRepository.getMovie(movieId, token)
-
         }
     }
 
     override fun getDetail(name: String): LiveData<List<DetailUseCaseModel>> {
         return Transformations.map(localDataSourceRepository.getAllDetail(name)) {
-            mapper.mapListDetailDbModelToListDetailUseCaseModel(it)}
+            mapper.mapListDetailDbModelToListDetailUseCaseModel(it)
+        }
     }
 
     override fun getMovie(): LiveData<MovieUseCaseModel?> {
         return Transformations.map(localDataSourceRepository.getMovie(1)) {
-            mapper.mapMovieDbModelToMovieUseCaseModel(it)}
+            mapper.mapMovieDbModelToMovieUseCaseModel(it)
+        }
     }
 
     override fun searchReview(movieId: String) {
         CoroutineScope(Dispatchers.IO).launch {
-        localDataSourceRepository.clearReview()
-        remoteDataSourceRepository.getReview(
-            Constance.REVIEWS_BY_ID, movieId, Constance.LIMIT, Constance.TOKEN)}
+            localDataSourceRepository.clearReview()
+            remoteDataSourceRepository.getReview(
+                Constance.REVIEWS_BY_ID, movieId, Constance.LIMIT, Constance.TOKEN
+            )
+        }
     }
 
     override fun searchPreviewByPerson(personId: String) {
@@ -124,7 +123,7 @@ class RepositoryImpl @Inject constructor (
     }
 
     override fun checkFavoritesPreview(movieId: Int): Boolean {
-            return localDataSourceRepository.checkFavoritesPreview(movieId)
+        return localDataSourceRepository.checkFavoritesPreview(movieId)
 
     }
 
@@ -133,6 +132,4 @@ class RepositoryImpl @Inject constructor (
             localDataSourceRepository.deleteFavoritesPreview(movieId)
         }
     }
-
-
 }

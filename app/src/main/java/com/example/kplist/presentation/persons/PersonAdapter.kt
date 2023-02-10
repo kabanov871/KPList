@@ -9,13 +9,14 @@ import com.squareup.picasso.Picasso
 
 class PersonAdapter(
     private val searchPreviewByPerson: (personId: String) -> Unit
-): RecyclerView.Adapter<PersonAdapter.PersonHolder>() {
+) : RecyclerView.Adapter<PersonAdapter.PersonHolder>() {
 
     private var personList = ArrayList<PersonUseCaseModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonHolder {
-
-        val binding : PersonItemBinding = PersonItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding: PersonItemBinding = PersonItemBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
         return PersonHolder(binding)
     }
 
@@ -27,31 +28,25 @@ class PersonAdapter(
         holder.bind(personList[position], searchPreviewByPerson)
     }
 
-    fun setList (list: List<PersonUseCaseModel>){
+    fun setList(list: List<PersonUseCaseModel>) {
         personList.clear()
         personList.addAll(list)
     }
 
-    class PersonHolder(val binding: PersonItemBinding): RecyclerView.ViewHolder(binding.root){
-
-
-        fun bind(person: PersonUseCaseModel,
-                 searchPreviewByPerson:(personId: String)->Unit) {
-
+    class PersonHolder(val binding: PersonItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(
+            person: PersonUseCaseModel,
+            searchPreviewByPerson: (personId: String) -> Unit
+        ) {
             binding.apply {
-
                 val getImage = person.photo
                 Picasso.get().load(getImage).into(imageViewPerson)
                 textViewProf.text = person.prof
                 textViewPersonName.text = person.name
-                cardView.setOnClickListener{
+                cardView.setOnClickListener {
                     searchPreviewByPerson(person.personId.toString())
                 }
-
             }
-
-
         }
     }
-
 }

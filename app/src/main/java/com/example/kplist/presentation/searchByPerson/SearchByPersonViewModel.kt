@@ -7,13 +7,12 @@ import com.example.kplist.domain.previewUseCase.GetAllPreviewByPersonUseCase
 import com.example.kplist.domain.previewUseCase.SearchPreviewByPersonUseCase
 import javax.inject.Inject
 
-class SearchByPersonViewModel @Inject constructor (
+class SearchByPersonViewModel @Inject constructor(
     private val searchPreviewByPersonUseCase: SearchPreviewByPersonUseCase,
     private val getAllPreviewByPersonUseCase: GetAllPreviewByPersonUseCase
-    ): ViewModel() {
+) : ViewModel() {
 
     fun searchPreviewByPerson(personId: String) {
-
         searchPreviewByPersonUseCase.searchPreviewByPerson(personId)
     }
 

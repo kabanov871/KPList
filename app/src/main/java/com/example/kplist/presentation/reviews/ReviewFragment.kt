@@ -21,13 +21,12 @@ import javax.inject.Inject
 
 class ReviewFragment : Fragment() {
 
-    lateinit var binding: FragmentReviewBinding
-    lateinit var adapter: ReviewAdapter
+    private lateinit var binding: FragmentReviewBinding
+    private lateinit var adapter: ReviewAdapter
     private lateinit var viewModel: ReviewViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     private val component by lazy {
         (requireActivity().application as MyApp).component
     }
@@ -42,28 +41,21 @@ class ReviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentReviewBinding.inflate(inflater, container, false)
-
         viewModel = ViewModelProvider(this, viewModelFactory)[ReviewViewModel::class.java]
-
         binding.rv.layoutManager = LinearLayoutManager(context)
-        adapter = ReviewAdapter ()
+        adapter = ReviewAdapter()
         binding.rv.adapter = adapter
-
         displayStartReview()
-
         return binding.root
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun displayStartReview(){
-
-        viewModel.getReview.observe(viewLifecycleOwner
-
+    private fun displayStartReview() {
+        viewModel.getReview.observe(
+            viewLifecycleOwner
         ) {
             adapter.setList(it)
             adapter.notifyDataSetChanged()
         }
-
     }
-
 }

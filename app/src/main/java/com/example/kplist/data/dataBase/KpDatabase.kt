@@ -6,15 +6,17 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.kplist.data.models.dbModels.*
 
-@Database(entities = [
-    PreviewDbModel::class,
-    PreviewByPersonDbModel::class,
-    FavoritesPreviewDbModel::class,
-    ReviewDbModel::class,
-    MovieDbModel::class,
-    PersonDbModel::class,
-    DetailDbModel::class], version = 16)
-abstract class KpDatabase: RoomDatabase() {
+@Database(
+    entities = [
+        PreviewDbModel::class,
+        PreviewByPersonDbModel::class,
+        FavoritesPreviewDbModel::class,
+        ReviewDbModel::class,
+        MovieDbModel::class,
+        PersonDbModel::class,
+        DetailDbModel::class], version = 16
+)
+abstract class KpDatabase : RoomDatabase() {
 
     abstract val previewDAO: PreviewDao
     abstract val favoritesPreviewDAO: FavoritesPreviewDao
@@ -24,13 +26,13 @@ abstract class KpDatabase: RoomDatabase() {
     abstract val personDAO: PersonDao
     abstract val detailDAO: DetailDao
 
-    companion object{
+    companion object {
         @Volatile
-        private var INSTANCE : KpDatabase? = null
-        fun getInstance(context: Context):KpDatabase{
-            synchronized(this){
+        private var INSTANCE: KpDatabase? = null
+        fun getInstance(context: Context): KpDatabase {
+            synchronized(this) {
                 var instance = INSTANCE
-                if(instance==null){
+                if (instance == null) {
                     instance = Room.databaseBuilder(
                         context.applicationContext, KpDatabase::class.java, "database16"
                     ).build()
@@ -38,6 +40,5 @@ abstract class KpDatabase: RoomDatabase() {
                 return instance
             }
         }
-
     }
 }

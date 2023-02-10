@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName ="person_table")
-data class PersonDbModel (
+@Entity(tableName = "person_table")
+data class PersonDbModel(
 
     @PrimaryKey(autoGenerate = true)
     val id: Int,
@@ -18,4 +18,4 @@ data class PersonDbModel (
     val name: String? = null,
 
     val prof: String? = null
-        )
+)

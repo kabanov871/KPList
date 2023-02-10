@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName ="favorites_preview_table")
+@Entity(tableName = "favorites_preview_table")
 data class FavoritesPreviewDbModel(
 
     @PrimaryKey(autoGenerate = true)

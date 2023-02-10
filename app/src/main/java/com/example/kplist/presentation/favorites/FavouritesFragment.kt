@@ -21,14 +21,13 @@ import javax.inject.Inject
 
 class FavouritesFragment : Fragment() {
 
-    lateinit var binding: FragmentFavouritesBinding
-    lateinit var adapter: FavoritesAdapter
+    private lateinit var binding: FragmentFavouritesBinding
+    private lateinit var adapter: FavoritesAdapter
     private lateinit var viewModel: FavoritesViewModel
     private lateinit var searchViewModel: SearchViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-
     private val component by lazy {
         (requireActivity().application as MyApp).component
     }
@@ -42,41 +41,41 @@ class FavouritesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFavouritesBinding.inflate(inflater, container, false)
-
-        viewModel = ViewModelProvider(this, viewModelFactory)[FavoritesViewModel::class.java]
-
-        searchViewModel = ViewModelProvider(this, viewModelFactory)[SearchViewModel::class.java]
-
+        binding = FragmentFavouritesBinding.inflate(
+            inflater, container, false
+        )
+        viewModel = ViewModelProvider(
+            this, viewModelFactory
+        )[FavoritesViewModel::class.java]
+        searchViewModel = ViewModelProvider(
+            this, viewModelFactory
+        )[SearchViewModel::class.java]
         binding.rw.layoutManager = GridLayoutManager(context, 2)
         adapter = FavoritesAdapter { movieId: String -> searchMovie(movieId) }
         binding.rw.adapter = adapter
-
         binding.bmenu.selectedItemId = R.id.item2
         binding.bmenu.setOnItemSelectedListener {
-            when (it.itemId){
-
-                R.id.item1 ->{findNavController().navigate(R.id.action_favouritesFragment_to_searchFragment)}
-
+            when (it.itemId) {
+                R.id.item1 -> {
+                    findNavController().navigate(
+                        R.id.action_favouritesFragment_to_searchFragment
+                    )
+                }
             }
             return@setOnItemSelectedListener true
         }
-
         displayStartPreview()
-
         return binding.root
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun displayStartPreview(){
-
-        viewModel.getAllFavoritesPreview.observe(viewLifecycleOwner
-
+    private fun displayStartPreview() {
+        viewModel.getAllFavoritesPreview.observe(
+            viewLifecycleOwner
         ) {
             adapter.setList(it)
             adapter.notifyDataSetChanged()
         }
-
     }
 
     private fun searchMovie(movieId: String) {
@@ -84,5 +83,4 @@ class FavouritesFragment : Fragment() {
         searchViewModel.searchReview(movieId)
         findNavController().navigate(R.id.action_favouritesFragment_to_movieFragment)
     }
-
 }

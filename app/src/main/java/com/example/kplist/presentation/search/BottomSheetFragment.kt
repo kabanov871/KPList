@@ -11,16 +11,18 @@ import com.example.kplist.databinding.FragmentBottomSheetBinding
 import com.example.kplist.presentation.Constance
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetFragment(private val advancedSearch:(
-    nameField: String,
-    search: String,
-    nameField2: String,
-    search2: String,
-    sortField: String,
-    sortType: String)->Unit
-) : BottomSheetDialogFragment(){
+class BottomSheetFragment(
+    private val advancedSearch: (
+        nameField: String,
+        search: String,
+        nameField2: String,
+        search2: String,
+        sortField: String,
+        sortType: String
+    ) -> Unit
+) : BottomSheetDialogFragment() {
 
-    lateinit var binding : FragmentBottomSheetBinding
+    private lateinit var binding: FragmentBottomSheetBinding
     override fun getTheme() = R.style.AppBottomSheetDialogTheme
 
     override fun onCreateView(
@@ -29,28 +31,21 @@ class BottomSheetFragment(private val advancedSearch:(
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
-
         var checkType = Constance.TYPE_MOVIE
         var checkSort = Constance.SORT_BY_YEAR
-
         binding.textType.text = resources.getString(R.string.movie)
         binding.textGenres.text = resources.getString(R.string.actionMovie)
         binding.textSorted.text = resources.getString(R.string.releaseDate)
-
         binding.textType.setOnClickListener {
             showAlertDialogSingleType()
         }
-
         binding.textGenres.setOnClickListener {
             showAlertDialogSingleGenres()
         }
-
         binding.textSorted.setOnClickListener {
             showAlertDialogSingleSort()
         }
-
         binding.buttonSearch.setOnClickListener {
-
             if (binding.textType.text == resources.getString(R.string.movie)) {
                 checkType = Constance.TYPE_MOVIE
             }
@@ -66,7 +61,6 @@ class BottomSheetFragment(private val advancedSearch:(
             if (binding.textType.text == resources.getString(R.string.animeSeries)) {
                 checkType = Constance.TYPE_ANIME_SERIALS
             }
-
             if (binding.textSorted.text == resources.getString(R.string.ratingKp)) {
                 checkSort = Constance.SORT_BY_KP
             }
@@ -76,22 +70,20 @@ class BottomSheetFragment(private val advancedSearch:(
             if (binding.textSorted.text == resources.getString(R.string.releaseDate)) {
                 checkSort = Constance.SORT_BY_YEAR
             }
-
             advancedSearch(
-                    Constance.SORT_TYPE,
-                    checkType,
-                    Constance.SORT_GENRES,
-                    binding.textGenres.text as String,
-                    checkSort,
-                    Constance.FROM_LARGER_TO_SMALLER)
+                Constance.SORT_TYPE,
+                checkType,
+                Constance.SORT_GENRES,
+                binding.textGenres.text as String,
+                checkSort,
+                Constance.FROM_LARGER_TO_SMALLER
+            )
             dismiss()
-
         }
-
         return binding.root
     }
-    private fun showAlertDialogSingleType(){
 
+    private fun showAlertDialogSingleType() {
         val list = arrayOf(
             resources.getString(R.string.movie),
             resources.getString(R.string.serials),
@@ -99,23 +91,19 @@ class BottomSheetFragment(private val advancedSearch:(
             resources.getString(R.string.anime),
             resources.getString(R.string.animeSeries)
         )
-
-        val dialog = AlertDialog.Builder(context,R.style.AlertDialog)
+        val dialog = AlertDialog.Builder(context, R.style.AlertDialog)
             .setCancelable(true)
             .setIcon(R.drawable.ic_baseline_bathtub_24)
             .setTitle(resources.getString(R.string.selectedType))
-            .setSingleChoiceItems(list, -1){dialog, wich ->
+            .setSingleChoiceItems(list, -1) { dialog, wich ->
                 binding.textType.text = list[wich]
-
                 dialog.dismiss()
             }
             .create()
-
         dialog.show()
     }
 
-    private fun showAlertDialogSingleGenres(){
-
+    private fun showAlertDialogSingleGenres() {
         val list = arrayOf(
             resources.getString(R.string.biography),
             resources.getString(R.string.actionMovie),
@@ -148,39 +136,33 @@ class BottomSheetFragment(private val advancedSearch:(
             resources.getString(R.string.fantasy),
             resources.getString(R.string.ceremony),
         )
-
-        val dialog = AlertDialog.Builder(context,R.style.AlertDialog)
+        val dialog = AlertDialog.Builder(context, R.style.AlertDialog)
             .setCancelable(true)
             .setIcon(R.drawable.ic_baseline_touch_app_24)
             .setTitle(resources.getString(R.string.selectedGenre))
-            .setSingleChoiceItems(list, -1){dialog, wich ->
+            .setSingleChoiceItems(list, -1) { dialog, wich ->
                 binding.textGenres.text = list[wich]
                 dialog.dismiss()
             }
             .create()
-
         dialog.show()
     }
 
-    private fun showAlertDialogSingleSort(){
-
+    private fun showAlertDialogSingleSort() {
         val list = arrayOf(
             resources.getString(R.string.ratingKp),
             resources.getString(R.string.ratingImdb),
             resources.getString(R.string.releaseDate)
         )
-
-        val dialog = AlertDialog.Builder(context,R.style.AlertDialog)
+        val dialog = AlertDialog.Builder(context, R.style.AlertDialog)
             .setCancelable(true)
             .setIcon(R.drawable.ic_baseline_pan_tool_alt_24)
             .setTitle(resources.getString(R.string.selectedSort))
-            .setSingleChoiceItems(list, -1){dialog, wich ->
+            .setSingleChoiceItems(list, -1) { dialog, wich ->
                 binding.textSorted.text = list[wich]
                 dialog.dismiss()
             }
             .create()
-
         dialog.show()
     }
-
 }
