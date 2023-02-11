@@ -8,15 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kplist.R
 import com.example.kplist.databinding.FragmentFactsBinding
-import com.example.kplist.databinding.FragmentMovieBinding
 import com.example.kplist.presentation.MyApp
 import com.example.kplist.presentation.ViewModelFactory
-import com.example.kplist.presentation.search.SearchAdapter
-import com.example.kplist.presentation.search.SearchViewModel
 import javax.inject.Inject
 
 class FactsFragment : Fragment() {
@@ -51,11 +47,10 @@ class FactsFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun displayStartFacts() {
-        viewModel.getDetail(R.string.detail_fact.toString()).observe(
-            viewLifecycleOwner
-        ) {
-            adapter.setList(it)
-            adapter.notifyDataSetChanged()
-        }
+        viewModel.getDetail(R.string.detail_fact.toString())
+            .observe(viewLifecycleOwner) {
+                adapter.setList(it)
+                adapter.notifyDataSetChanged()
+            }
     }
 }

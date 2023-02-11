@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.kplist.R
 import com.example.kplist.databinding.FragmentSearchBinding
 import com.example.kplist.presentation.Constance
@@ -86,12 +85,11 @@ class SearchFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun displayStartPreview() {
-        viewModel.getAllPreview.observe(
-            viewLifecycleOwner
-        ) {
-            adapter.setList(it)
-            adapter.notifyDataSetChanged()
-        }
+        viewModel.getAllPreview
+            .observe(viewLifecycleOwner) {
+                adapter.setList(it)
+                adapter.notifyDataSetChanged()
+            }
     }
 
     private fun searchByNamePreview(name: String) {

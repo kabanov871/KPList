@@ -11,13 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.kplist.R
-import com.example.kplist.databinding.FragmentPersonBinding
 import com.example.kplist.databinding.FragmentSearchByPersonBinding
 import com.example.kplist.presentation.Constance
 import com.example.kplist.presentation.MyApp
 import com.example.kplist.presentation.ViewModelFactory
-import com.example.kplist.presentation.persons.PersonAdapter
-import com.example.kplist.presentation.persons.PersonViewModel
 import com.example.kplist.presentation.search.SearchViewModel
 import javax.inject.Inject
 
@@ -60,12 +57,11 @@ class SearchByPersonFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun displayStartSearchByPerson() {
-        viewModel.getAllPreviewByPerson.observe(
-            viewLifecycleOwner
-        ) {
-            adapter.setList(it)
-            adapter.notifyDataSetChanged()
-        }
+        viewModel.getAllPreviewByPerson
+            .observe(viewLifecycleOwner) {
+                adapter.setList(it)
+                adapter.notifyDataSetChanged()
+            }
     }
 
     private fun searchMovie(movieId: String) {

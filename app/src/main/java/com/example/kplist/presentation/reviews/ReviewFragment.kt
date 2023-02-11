@@ -9,14 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.kplist.R
-import com.example.kplist.databinding.FragmentPersonBinding
 import com.example.kplist.databinding.FragmentReviewBinding
 import com.example.kplist.presentation.MyApp
 import com.example.kplist.presentation.ViewModelFactory
-import com.example.kplist.presentation.facts.FactAdapter
-import com.example.kplist.presentation.search.SearchAdapter
-import com.example.kplist.presentation.search.SearchViewModel
 import javax.inject.Inject
 
 class ReviewFragment : Fragment() {
@@ -51,11 +46,10 @@ class ReviewFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun displayStartReview() {
-        viewModel.getReview.observe(
-            viewLifecycleOwner
-        ) {
-            adapter.setList(it)
-            adapter.notifyDataSetChanged()
-        }
+        viewModel.getReview
+            .observe(viewLifecycleOwner) {
+                adapter.setList(it)
+                adapter.notifyDataSetChanged()
+            }
     }
 }

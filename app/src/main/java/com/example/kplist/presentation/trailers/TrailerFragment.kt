@@ -12,11 +12,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kplist.R
-import com.example.kplist.databinding.FragmentReviewBinding
 import com.example.kplist.databinding.FragmentTrailerBinding
 import com.example.kplist.presentation.MyApp
 import com.example.kplist.presentation.ViewModelFactory
-import com.example.kplist.presentation.facts.FactAdapter
 import com.example.kplist.presentation.facts.FactViewModel
 import javax.inject.Inject
 
@@ -52,12 +50,11 @@ class TrailerFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun displayStartTrailer() {
-        viewModel.getDetail(R.string.detail_trailer.toString()).observe(
-            viewLifecycleOwner
-        ) {
-            adapter.setList(it)
-            adapter.notifyDataSetChanged()
-        }
+        viewModel.getDetail(R.string.detail_trailer.toString())
+            .observe(viewLifecycleOwner) {
+                adapter.setList(it)
+                adapter.notifyDataSetChanged()
+            }
     }
 
     private fun openUrl(url: String) {

@@ -15,7 +15,6 @@ import com.example.kplist.databinding.FragmentFavouritesBinding
 import com.example.kplist.presentation.Constance
 import com.example.kplist.presentation.MyApp
 import com.example.kplist.presentation.ViewModelFactory
-import com.example.kplist.presentation.search.SearchAdapter
 import com.example.kplist.presentation.search.SearchViewModel
 import javax.inject.Inject
 
@@ -70,12 +69,11 @@ class FavouritesFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun displayStartPreview() {
-        viewModel.getAllFavoritesPreview.observe(
-            viewLifecycleOwner
-        ) {
-            adapter.setList(it)
-            adapter.notifyDataSetChanged()
-        }
+        viewModel.getAllFavoritesPreview
+            .observe(viewLifecycleOwner) {
+                adapter.setList(it)
+                adapter.notifyDataSetChanged()
+            }
     }
 
     private fun searchMovie(movieId: String) {

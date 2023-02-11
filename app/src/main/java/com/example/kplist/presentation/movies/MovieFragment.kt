@@ -81,26 +81,27 @@ class MovieFragment : Fragment() {
                 }
             }
         }
-        viewModel.getDetail(R.string.detail_country.toString()).observe(viewLifecycleOwner) {
-            if (it.size == 1) {
-                binding.country1.text = it[0].value
+        viewModel.getDetail(R.string.detail_country.toString())
+            .observe(viewLifecycleOwner) {
+                if (it.size == 1) {
+                    binding.country1.text = it[0].value
+                }
+                if (it.size == 2) {
+                    binding.country1.text = it[0].value
+                    binding.country2.text = it[1].value
+                }
+                if (it.size == 3) {
+                    binding.country1.text = it[0].value
+                    binding.country2.text = it[1].value
+                    binding.country3.text = it[2].value
+                }
+                if (it.size > 3) {
+                    binding.country1.text = it[0].value
+                    binding.country2.text = it[1].value
+                    binding.country3.text = it[2].value
+                    binding.country4.text = it[3].value
+                }
             }
-            if (it.size == 2) {
-                binding.country1.text = it[0].value
-                binding.country2.text = it[1].value
-            }
-            if (it.size == 3) {
-                binding.country1.text = it[0].value
-                binding.country2.text = it[1].value
-                binding.country3.text = it[2].value
-            }
-            if (it.size > 3) {
-                binding.country1.text = it[0].value
-                binding.country2.text = it[1].value
-                binding.country3.text = it[2].value
-                binding.country4.text = it[3].value
-            }
-        }
         binding.buttonPerson.setOnClickListener {
             findNavController().navigate(R.id.action_movieFragment_to_personFragment)
         }

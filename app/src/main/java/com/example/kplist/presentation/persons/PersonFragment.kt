@@ -10,14 +10,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kplist.R
-import com.example.kplist.databinding.FragmentFactsBinding
 import com.example.kplist.databinding.FragmentPersonBinding
 import com.example.kplist.presentation.MyApp
 import com.example.kplist.presentation.ViewModelFactory
-import com.example.kplist.presentation.facts.FactAdapter
-import com.example.kplist.presentation.facts.FactViewModel
 import com.example.kplist.presentation.searchByPerson.SearchByPersonViewModel
 import javax.inject.Inject
 
@@ -59,12 +55,11 @@ class PersonFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun displayStartPerson() {
-        viewModel.getPerson.observe(
-            viewLifecycleOwner
-        ) {
-            adapter.setList(it)
-            adapter.notifyDataSetChanged()
-        }
+        viewModel.getPerson
+            .observe(viewLifecycleOwner) {
+                adapter.setList(it)
+                adapter.notifyDataSetChanged()
+            }
     }
 
     private fun searchPreviewByPerson(personId: String) {
