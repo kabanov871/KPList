@@ -43,10 +43,12 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
+
         viewModel = ViewModelProvider(this, viewModelFactory)[SearchViewModel::class.java]
+
         favoritesViewModel = ViewModelProvider(
-            this, viewModelFactory
-        )[FavoritesViewModel::class.java]
+            this, viewModelFactory)[FavoritesViewModel::class.java]
+
         binding.bmenu.selectedItemId = R.id.item1
         binding.bmenu.setOnItemSelectedListener {
             when (it.itemId) {

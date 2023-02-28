@@ -43,10 +43,12 @@ class MovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMovieBinding.inflate(inflater, container, false)
+
         viewModel = ViewModelProvider(this, viewModelFactory)[MovieViewModel::class.java]
+
         favoritesViewModel = ViewModelProvider(
-            this, viewModelFactory
-        )[FavoritesViewModel::class.java]
+            this, viewModelFactory)[FavoritesViewModel::class.java]
+
         viewModel.getMovie().observe(viewLifecycleOwner) {
             val response = it
             if (response != null) {
@@ -59,6 +61,7 @@ class MovieFragment : Fragment() {
                 Picasso.get().load(getImage).into(binding.imageViewPoster)
                 binding.textYear.text = response.year
                 binding.textDesc.text = response.description
+
                 CoroutineScope(Dispatchers.IO).launch {
                     val exists = favoritesViewModel.checkFavoritesPreview(check)
                     if (!exists) {

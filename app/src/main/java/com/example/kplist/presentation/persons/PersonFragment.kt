@@ -40,12 +40,13 @@ class PersonFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPersonBinding.inflate(inflater, container, false)
+
         viewModel = ViewModelProvider(
-            this, viewModelFactory
-        )[PersonViewModel::class.java]
+            this, viewModelFactory)[PersonViewModel::class.java]
+
         viewModelByPerson = ViewModelProvider(
-            this, viewModelFactory
-        )[SearchByPersonViewModel::class.java]
+            this, viewModelFactory)[SearchByPersonViewModel::class.java]
+
         binding.rv.layoutManager = GridLayoutManager(context, 2)
         adapter = PersonAdapter { personId: String -> searchPreviewByPerson(personId) }
         binding.rv.adapter = adapter

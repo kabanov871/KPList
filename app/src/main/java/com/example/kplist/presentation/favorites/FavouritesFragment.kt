@@ -40,19 +40,20 @@ class FavouritesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFavouritesBinding.inflate(
-            inflater, container, false
-        )
+        binding = FragmentFavouritesBinding
+            .inflate(inflater, container, false)
+
         viewModel = ViewModelProvider(
-            this, viewModelFactory
-        )[FavoritesViewModel::class.java]
+            this, viewModelFactory)[FavoritesViewModel::class.java]
+
         searchViewModel = ViewModelProvider(
-            this, viewModelFactory
-        )[SearchViewModel::class.java]
+            this, viewModelFactory)[SearchViewModel::class.java]
+
         binding.rw.layoutManager = GridLayoutManager(context, 2)
         adapter = FavoritesAdapter { movieId: String -> searchMovie(movieId) }
         binding.rw.adapter = adapter
         binding.bmenu.selectedItemId = R.id.item2
+
         binding.bmenu.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.item1 -> {

@@ -42,12 +42,13 @@ class SearchByPersonFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSearchByPersonBinding.inflate(inflater, container, false)
+
         viewModel = ViewModelProvider(
-            this, viewModelFactory
-        )[SearchByPersonViewModel::class.java]
+            this, viewModelFactory)[SearchByPersonViewModel::class.java]
+
         viewModelSearch = ViewModelProvider(
-            this, viewModelFactory
-        )[SearchViewModel::class.java]
+            this, viewModelFactory)[SearchViewModel::class.java]
+
         binding.rv.layoutManager = GridLayoutManager(context, 2)
         adapter = SearchByPersonAdapter { movieId: String -> searchMovie(movieId) }
         binding.rv.adapter = adapter
